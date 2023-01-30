@@ -66,10 +66,12 @@ export default {
     if(kunden_id == null){
       this.$router.push({name: "login"});
     }
-    console.log(kunden_id);
   },
   methods: {
     async onsearch(){
+      this.$store.commit('setStartdatum', this.startdatum);
+      this.$store.commit('setEnddatum', this.enddatum);
+
       var res = await axios.post('https://localhost:7082/api/Buchung/GetVerfuegbareLiegeplaetze', {
                                                                                     bootlaenge: this.bootlaenge,
                                                                                     bootbreite: this.bootbreite,

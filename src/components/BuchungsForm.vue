@@ -9,13 +9,13 @@
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Boot</label>
         <div class="input-group">
-        <select class="form-select">
-          <option disabled value="" selected="selected">Bitte Boot auswählen</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+        <select class="form-select" v-model="selected">
+          <option :value="-1">Bitte Boot wählen oder Anlegen</option>        
+          <option v-for="Boot in BooteDesUsers" v-bind:key="Boot.m_RegistrierungsId" v-bind:value="Boot.m_RegistrierungsId">
+            {{Boot.m_Name}}
+        </option>
         </select>
-        <span class="input-group-text" id="basic-addon2" href="#" @click.self="toggleComponent()">+</span>
+        <span class="input-group-text" id="basic-addon2" href="#" v-on:click.prevent="toggleComponent()">+</span>
       </div>
       </div>
       
@@ -23,7 +23,7 @@
         <label for="tagespreis" class="form-label">Tagespreis</label>
         <input type="text" class="form-control" id="tagespreis" disabled v-model="Tagespreis">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" v-on:click.prevent="onBuchen">Platz buchen</button>
     </form>
   </div>
   <div class="border rounded container p-5 text-start mt-5" v-show="visible">
@@ -52,25 +52,50 @@ import { useCookies } from "vue3-cookies";
 
 export default {
   name: 'BuchungsForm',
+  components: {},
   data() {
   return{
     Bezeichnung: null,
     Tagespreis: null,
     BooteDesUsers: null,
-    visible: false
+    visible: false,
+    selected: "-1"
   };
 },
 methods:{
   toggleComponent() {
-    console.log(this.visible);
     this.visible = !this.visible;
+  },
+  async onBuchen(){
+    console.log(this.selected);
+    const kunden_id = this.cookies.get("kunden_id").kundenId;
+    const startdatum = this.$store.getters.getstartDatum;
+    const enddatum = this.$store.getters.getEnddatum;
+    const liegeplatzid = this.$store.getters.getLiegeplatzId;
+
+    var res = await axios.post('https://localhost:7082/api/Buchung/CreateBuchung',{ kundenid: kunden_id,
+                                                                                    liegeplatzid: liegeplatzid,
+                                                                                    registrierungsid: this.selected,
+                                                                                    start: startdatum,
+                                                                                    end: enddatum,
+                                                                                    wasser: true,
+                                                                                    strom: true})
+    console.log(res.data);
+    if(res.data != -1){
+      //buchung Erfolg
+      //TODO was passiert jetzt
+    }else{
+      //buchung klappte nichtz
+    }
+
   }
 },
 setup(){
-    const { cookies } = useCookies();
+   const { cookies } = useCookies();
     return { cookies };
   },
 async created(){
+
   this.Bezeichnung = this.$store.getters.getLiegeplatzBezeichnung;
   this.Tagespreis = this.$store.getters.getLiegeplatzTagespreis;
 
