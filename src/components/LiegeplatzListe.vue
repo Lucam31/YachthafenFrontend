@@ -1,14 +1,14 @@
 <template>
   <div class="list-group">
-    <div class="list-group-item" v-for="{m_LiegeplatzId, m_Bezeichnung, m_Laenge, m_Breite, m_Tiefgang, m_Tagespreis } of Angebot" :key="m_LiegeplatzId">        
-      <h2 class="Titel">{{ m_Bezeichnung }}</h2>
-      <p class="item">Länge: {{ m_Laenge }} m</p>
-      <p class="item">Breite: {{ m_Breite }} m</p>
-      <p class="item">Tiefgang: {{ m_Tiefgang }} cm</p>
-      <p class="item">Tagespreis: {{ m_Tagespreis }} €</p>      
-      <router-link :to="{name: 'buchen', params: {liegeplatz_id: m_LiegeplatzId }}" >
-        <input type="button" class="input-group-text buchen" value="Buchen" aria-label="Username" aria-describedby="basic-addon1" role="link">
-      </router-link>
+    <div class="list-group-item" v-for="Angebot in Angebote" :key="Angebot.m_LiegeplatzId">        
+      <h2 class="Titel">{{ Angebot.m_Bezeichnung }}</h2>
+      <p class="item">Länge: {{ Angebot.m_Laenge }} m</p>
+      <p class="item">Breite: {{ Angebot.m_Breite }} m</p>
+      <p class="item">Tiefgang: {{ Angebot.m_Tiefgang }} cm</p>
+      <p class="item">Tagespreis: {{ Angebot.m_Tagespreis }} €</p>      
+      
+        <input type="button" class="input-group-text buchen" value="Buchen" aria-label="Username" aria-describedby="basic-addon1" v-on:click="onNavigate({Angebot})" role="link">
+      
     </div>
   </div>
 </template>
@@ -19,11 +19,21 @@ export default {
 
 data() {
   return{
-    Angebot: this.$parent.Angebot,
+    Angebote: this.$parent.Angebot,
   };
 },
 created(){
   console.log(this.Angebot);
+},
+methods: {
+  onNavigate(Angebot){
+    const data = Angebot.Angebot;
+
+    this.$store.commit('setLiegeplatzBezeichnung', data.m_Bezeichnung)
+    this.$store.commit('setLiegeplatzID', data.m_LiegeplatzId)
+    this.$store.commit('setLiegeplatzTagespreis', data.m_Tagespreis)
+    this.$router.push({name: "buchen"});
+  }
 }}
 </script>
 

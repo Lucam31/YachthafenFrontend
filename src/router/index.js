@@ -22,9 +22,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/buchen/:liegeplatz_id',
+    path: '/buchen',
     name: 'buchen',
-    component: BuchenView
+    component: BuchenView 
   },
   {
     path: '/profile',

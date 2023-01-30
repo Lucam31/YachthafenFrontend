@@ -1,10 +1,11 @@
 <template>
   <div class="border rounded container p-5 text-start">
     <form>
+      <p>{{ $store.state.m_Bezeichnung }} </p>
       <p class="h2">Liegeplatz buchen</p>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Liegeplatzname</label>
-        <input type="text" class="form-control" id="bezeichnung" disabled value="Bezeichnung">
+        <input type="text" class="form-control" id="bezeichnung" disabled  v-model="Bezeichnung">
       </div>
       <div class="row">
         <div class="mb-3 col">
@@ -28,7 +29,7 @@
       </div>
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Tagespreis</label>
-        <input type="text" class="form-control" id="tagespreis" disabled>
+        <input type="text" class="form-control" id="tagespreis" disabled v-model="Tagespreis">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -37,7 +38,18 @@
 
 <script>
 export default {
-  name: 'BuchungsForm'
+  name: 'BuchungsForm',
+  data() {
+  return{
+    Bezeichnung: null,
+    Tagespreis: null
+  };
+},
+created(){
+  this.Bezeichnung = this.$store.getters.getLiegeplatzBezeichnung;
+  this.Tagespreis = this.$store.getters.getLiegeplatzTagespreis;
+ 
+},
 }
 </script>
 
