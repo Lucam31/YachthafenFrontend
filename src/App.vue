@@ -21,7 +21,9 @@
     </div>
   </div>
 </nav>
+<div class="content">
   <router-view/>
+</div>
 </template>
 
 <style>
@@ -44,5 +46,15 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.content{
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, 0%);
+  width: 80%;
+  display: block;
+  flex: wrap;
 }
 </style>

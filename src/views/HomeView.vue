@@ -1,8 +1,6 @@
 <template>
-  <div class="content">
-    <AngebotsSuche></AngebotsSuche>
-    <LiegeplatzListe></LiegeplatzListe>
-  </div>
+  <AngebotsSuche></AngebotsSuche>
+  <LiegeplatzListe></LiegeplatzListe>
 </template>
 
 <script>

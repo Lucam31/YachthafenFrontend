@@ -40,10 +40,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .filter{
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 80%;
-  }
 </style>
