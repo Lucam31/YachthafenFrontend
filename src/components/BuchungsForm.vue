@@ -30,18 +30,26 @@
     <form>
       <p class="h2 mb-5">Boot anlegen</p>
       <div class="mb-3">
+        <label for="bezeichnung" class="form-label">Registrierungsnummer</label>
+        <input type="text" class="form-control" id="Registrierung" v-model="registrierungsid">
+      </div>
+      <div class="mb-3">
         <label for="bezeichnung" class="form-label">Bootsname</label>
         <input type="text" class="form-control" id="boot_name" v-model="Boot_name">
       </div>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Penislänge</label>
         <input type="text" class="form-control" id="laenge" v-model="Laenge">
-      </div>
-      
+      </div>      
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Breite</label>
         <input type="text" class="form-control" id="breite" v-model="Breite">
       </div>
+      <div class="mb-3">
+        <label for="tagespreis" class="form-label">Tiefe</label>
+        <input type="text" class="form-control" id="tiefe" v-model="Tiefe">
+      </div>
+      <button type="submit" class="btn btn-primary" v-on:click.prevent="onBootAnlegen">Boot speichern</button>
     </form>
   </div>
 </template>
@@ -59,7 +67,12 @@ export default {
     Tagespreis: null,
     BooteDesUsers: null,
     visible: false,
-    selected: "-1"
+    selected: "-1",
+    Boot_name: null,
+    Laenge: null,
+    Breite: null,
+    Tiefe: null,
+    registrierungsid: null
   };
 },
 methods:{
@@ -79,7 +92,7 @@ methods:{
                                                                                     start: startdatum,
                                                                                     end: enddatum,
                                                                                     wasser: true,
-                                                                                    strom: true})
+                                                                                    strom: true});
     console.log(res.data);
     if(res.data != -1){
       //buchung Erfolg
@@ -88,6 +101,15 @@ methods:{
       //buchung klappte nichtz
     }
 
+  },
+  async onBootAnlegen(){
+    var res = await axios.post('https://localhost:7082/api/Kunden/CreateBoot',{ name: this.Boot_name,
+                                                                                registrierungsid: this.registrierungsid,
+                                                                                laenge: this.laenge,
+                                                                                breite: this.breite,
+                                                                                tiefe: this.tiefe});
+    console.log(res.data);
+    this.created();
   }
 },
 setup(){
