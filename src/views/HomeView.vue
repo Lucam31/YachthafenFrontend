@@ -38,11 +38,17 @@
 
 import LiegeplatzListe from '@/components/LiegeplatzListe.vue'
 import axios from 'axios'
+import { useCookies } from "vue3-cookies";
+
 
 export default {
   name: 'HomeView',
   components: {
     LiegeplatzListe
+  },
+  setup(){
+    const { cookies } = useCookies();
+    return { cookies };
   },
   data() {
   return{
@@ -56,6 +62,7 @@ export default {
   },
 
   created() {
+    console.log(this.cookies.get("kunden_id"));
   },
   methods: {
     async onsearch(){
