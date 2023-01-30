@@ -26,7 +26,7 @@ export default {
 
   async created() {
 
-    var res = await axios.post('https://localhost:7082/api/Buchung/GetAngebote', {
+    var res = await axios.post('https://localhost:7082/api/Buchung/GetVerfuegbareLiegeplaetze', {
                                                                                     bootlaenge: 0,
                                                                                     bootbreite: 0,
                                                                                     boottiefgang: 0,
