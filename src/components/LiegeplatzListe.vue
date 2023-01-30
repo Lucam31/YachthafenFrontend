@@ -1,11 +1,11 @@
 <template>
   <div class="list-group">
-    <div class="list-group-item" v-for="{liegeplatz_id, bezeichnung, laenge, breite, tiefgang, tagespreis } of Angebot" :key="liegeplatz_id">        
-      <h2 class="Titel">{{ bezeichnung }}</h2>
-      <p class="item">Länge: {{ laenge }} m</p>
-      <p class="item">Breite: {{ breite }} m</p>
-      <p class="item">Tiefgang: {{ tiefgang }} cm</p>
-      <p class="item">Tagespreis: {{ tagespreis }} €</p>
+    <div class="list-group-item" v-for="{m_LiegeplatzId, m_Bezeichnung, m_Laenge, m_Breite, m_Tiefgang, m_Tagespreis } of Angebot" :key="m_LiegeplatzId">        
+      <h2 class="Titel">{{ m_Bezeichnung }}</h2>
+      <p class="item">Länge: {{ m_Laenge }} m</p>
+      <p class="item">Breite: {{ m_Breite }} m</p>
+      <p class="item">Tiefgang: {{ m_Tiefgang }} cm</p>
+      <p class="item">Tagespreis: {{ m_Tagespreis }} €</p>
       <router-link to="/buchen" custom v-slot="{ navigate }">
         <input type="button" class="input-group-text buchen" value="Buchen" aria-label="Username" aria-describedby="basic-addon1" @click="navigate" role="link">
       </router-link>
@@ -19,33 +19,11 @@ export default {
 
 data() {
   return{
-    Angebot: [
-    {
-        liegeplatz_id: 1,
-        bezeichnung: "Platz 1",
-        laenge: 1,
-        breite: 1,
-        tiefgang: 20,
-        tagespreis: 50
-      },
-      {
-        liegeplatz_id: 2,
-        bezeichnung: "Platz 2",
-        laenge: 5,
-        breite: 5,
-        tiefgang: 200,
-        tagespreis: 500
-      },
-      {
-        liegeplatz_id: 2,
-        bezeichnung: "Platz 3",
-        laenge: 5,
-        breite: 5,
-        tiefgang: 200,
-        tagespreis: 500
-      }
-    ]
+    Angebot: this.$parent.Angebot,
   };
+},
+created(){
+  console.log(this.Angebot);
 }}
 </script>
 
