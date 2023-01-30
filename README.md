@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+Buchen boot anlegen und suchen
+Verbesserung an der UI
+Start Enddatum machen

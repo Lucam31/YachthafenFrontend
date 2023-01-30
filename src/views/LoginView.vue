@@ -47,8 +47,10 @@ export default {
     this.kunden_id = res.data;
     console.log(res);
     this.cookies.set("kunden_id", this.kunden_id);
-    if(this.kunden_id != null){
+    if(this.kunden_id != "-1"){
       this.$router.push('/home')
+    }else{
+      //error Handling einfügen
     }
     }
   }
