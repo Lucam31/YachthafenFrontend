@@ -10,7 +10,7 @@
           <input type="text" class="form-control" id="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary" >Login</button>
-        <button type="submit" class="btn btn-primary"><a href="/register">Register</a></button>
+        <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton">Register</a></button>
       </form>
     </div>
   </div>
@@ -37,11 +37,11 @@ button{
   margin-left: 1rem;
   margin-right: 1rem;
 }
-a{
+.registerButton{
   text-decoration: none;
   color: white;
 }
-a:hover{
+.registerButton:hover{
   text-decoration: none;
   color: white;
 }
