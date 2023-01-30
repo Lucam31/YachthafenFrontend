@@ -40,17 +40,16 @@ export default {
   },
   methods: {
     async onLogin(){
-      var res = await axios.post('https://localhost:7082/api/Login/LoginKunde', {
-                                                                                    email: this.email,
-                                                                                    passwort: this.passwort});
+      var res = await axios.post('https://localhost:7082/api/Login/LoginKunde', {email: this.email,
+                                                                                 passwort: this.passwort});
 
     this.kunden_id = res.data;
     console.log(res);
     this.cookies.set("kunden_id", this.kunden_id);
     if(this.kunden_id != "-1"){
-      this.$router.push('/home')
+      this.$router.push('/suchen')
     }else{
-      //error Handling einfügen
+      //error Handling einfügen --> Nutzer ist nicht angemeldet
     }
     }
   }

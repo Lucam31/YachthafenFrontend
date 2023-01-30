@@ -23,7 +23,7 @@ data() {
   };
 },
 created(){
-  console.log(this.Angebot);
+  //console.log(this.Angebot);
 },
 methods: {
   onNavigate(Angebot){

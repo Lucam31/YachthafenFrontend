@@ -1,7 +1,6 @@
 <template>
   <div class="border rounded container p-5 text-start">
     <form>
-      <p>{{ $store.state.m_Bezeichnung }} </p>
       <p class="h2">Liegeplatz buchen</p>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Liegeplatzname</label>
@@ -37,18 +36,32 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { useCookies } from "vue3-cookies";
+
 export default {
   name: 'BuchungsForm',
   data() {
   return{
     Bezeichnung: null,
-    Tagespreis: null
+    Tagespreis: null,
+    BooteDesUsers: null
   };
 },
-created(){
+setup(){
+    const { cookies } = useCookies();
+    return { cookies };
+  },
+async created(){
   this.Bezeichnung = this.$store.getters.getLiegeplatzBezeichnung;
   this.Tagespreis = this.$store.getters.getLiegeplatzTagespreis;
- 
+
+  //Alle Boote des Users werden gehohlt und in BootedesUsers bereitgestellt
+  const kunden_id = this.cookies.get("kunden_id").kundenId;
+  console.log(kunden_id);
+  var res = await axios.get('https://localhost:7082/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
+  this.BooteDesUsers = res.data;
+  
 },
 }
 </script>

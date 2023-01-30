@@ -42,7 +42,7 @@ import { useCookies } from "vue3-cookies";
 
 
 export default {
-  name: 'HomeView',
+  name: 'SuchenView',
   components: {
     LiegeplatzListe
   },
@@ -62,7 +62,11 @@ export default {
   },
 
   created() {
-    console.log(this.cookies.get("kunden_id"));
+    const kunden_id = this.cookies.get("kunden_id");
+    if(kunden_id == null){
+      this.$router.push({name: "login"});
+    }
+    console.log(kunden_id);
   },
   methods: {
     async onsearch(){
@@ -74,6 +78,8 @@ export default {
                                                                                     enddatum: this.enddatum});
 
     this.Angebot = res.data;
+    
+   
     }
   }
 }
