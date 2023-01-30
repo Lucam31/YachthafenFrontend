@@ -5,9 +5,9 @@
       <p class="item">Länge: {{ m_Laenge }} m</p>
       <p class="item">Breite: {{ m_Breite }} m</p>
       <p class="item">Tiefgang: {{ m_Tiefgang }} cm</p>
-      <p class="item">Tagespreis: {{ m_Tagespreis }} €</p>
-      <router-link to="/buchen" custom v-slot="{ navigate }">
-        <input type="button" class="input-group-text buchen" value="Buchen" aria-label="Username" aria-describedby="basic-addon1" @click="navigate" role="link">
+      <p class="item">Tagespreis: {{ m_Tagespreis }} €</p>      
+      <router-link :to="{name: 'buchen', params: {liegeplatz_id: m_LiegeplatzId }}" >
+        <input type="button" class="input-group-text buchen" value="Buchen" aria-label="Username" aria-describedby="basic-addon1" role="link">
       </router-link>
     </div>
   </div>

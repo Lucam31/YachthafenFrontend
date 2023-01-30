@@ -53,11 +53,11 @@ export default {
   data() {
   return{
     Angebot: null,
-    bootlaenge: null,
-    bootbreite: null,
-    boottiefgang: null,
-    startdatum: "",
-    enddatum: ""
+    bootlaenge: 1,
+    bootbreite: 1,
+    boottiefgang: 1,
+    startdatum: "2023-01-16",
+    enddatum: "2023-01-21"
   };
   },
 
