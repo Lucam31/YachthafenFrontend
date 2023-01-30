@@ -21,6 +21,20 @@
         <div class="panel border rounded container p-3 text-center">
             Test4
         </div> -->
+        <div class="card auslastung">
+          <div class="img-section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </svg>
+          </div>
+          <div class="card-desc">
+            <div class="card-header">
+              <div class="card-title">Auslastung<br>heute</div>
+            </div>
+          <div class="card-percent">50%</div>
+          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+          </div>
+        </div>
         <div class="card work">
           <div class="img-section">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
@@ -30,11 +44,49 @@
           <div class="card-desc">
             <div class="card-header">
               <div class="card-title">Auslastung<br>heute</div>
-              <div class="card-menu">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-              </div>
+            </div>
+          <div class="card-percent">50%</div>
+          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+        </div>
+      </div>
+      <div class="card work">
+          <div class="img-section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </svg>
+          </div>
+          <div class="card-desc">
+            <div class="card-header">
+              <div class="card-title">Auslastung<br>heute</div>
+            </div>
+          <div class="card-percent">50%</div>
+          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+        </div>
+      </div>
+      <div class="card work">
+          <div class="img-section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </svg>
+          </div>
+          <div class="card-desc">
+            <div class="card-header">
+              <div class="card-title">Auslastung<br>heute</div>
+            </div>
+          <div class="card-percent">50%</div>
+          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+        </div>
+      </div>
+
+      <div class="card work">
+          <div class="img-section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </svg>
+          </div>
+          <div class="card-desc">
+            <div class="card-header">
+              <div class="card-title">Auslastung<br>heute</div>
             </div>
           <div class="card-percent">50%</div>
           <p class="recent">Insgesamt: 10 | Belegt: 5</p>
@@ -60,12 +112,13 @@
     width: 70%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    height: 80vh;
   }
   .card{
     width: 80%;
     height: 7rem;
     justify-self: center;
-    margin: 2em;
+    margin: 2em 0;
   }
   .overview{
     width: 30%;
@@ -82,14 +135,6 @@ svg{
   margin: 5px;
 }
 
-  .card {
- --primary-clr: #1C204B;
- --dot-clr: #BBC0FF;
- --play: hsl(195, 74%, 62%);
- width: 200px;
- height: 170px;
- border-radius: 10px;
-}
 
 .card {
  font-family: "Arial";
@@ -97,6 +142,10 @@ svg{
  display: grid;
  cursor: pointer;
  grid-template-rows: 50px 1fr;
+ --primary-clr: #1e1f22;
+ width: 200px;
+ height: 170px;
+ border-radius: 10px;
 }
 
 .card:hover .img-section {
@@ -122,7 +171,7 @@ svg{
  transition: 0.3s;
  border-top-left-radius: 10px;
  border-top-right-radius: 10px;
- background: hsl(195, 74%, 62%);
+ background: hsl(180, 3%, 64%);
 }
 
 .card-header {
