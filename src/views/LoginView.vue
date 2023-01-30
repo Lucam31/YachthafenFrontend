@@ -10,7 +10,7 @@
           <input type="text" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
         <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
-        <button type="submit" class="btn btn-primary"><a href="/register">Register</a></button>
+        <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton">Register</a></button>
       </form>
     </div>
   </div>
