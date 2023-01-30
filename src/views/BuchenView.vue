@@ -1,8 +1,6 @@
 <template>
-  <div class="content">
-    <BuchungsForm></BuchungsForm>
-    <LiegeplatzListe></LiegeplatzListe>
-  </div>
+  <BuchungsForm></BuchungsForm>
+  <LiegeplatzListe></LiegeplatzListe>
 </template>
 
 <script>

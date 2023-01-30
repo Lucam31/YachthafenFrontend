@@ -1,8 +1,6 @@
 <template>
-  <div class="content">
-    <AngebotsSuche></AngebotsSuche>
-    <LiegeplatzListe v-if="Angebot"></LiegeplatzListe>
-  </div>
+  <AngebotsSuche></AngebotsSuche>
+  <LiegeplatzListe v-if="Angebot"></LiegeplatzListe>
 </template>
 
 <script>
