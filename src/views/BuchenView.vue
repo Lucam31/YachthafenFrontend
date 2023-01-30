@@ -1,6 +1,5 @@
 <template>
   <BuchungsForm></BuchungsForm>
-  <LiegeplatzListe></LiegeplatzListe>
 </template>
 
 <script>

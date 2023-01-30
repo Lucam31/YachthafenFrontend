@@ -1,36 +1,47 @@
 <template>
   <div class="border rounded container p-5 text-start">
     <form>
-      <p class="h2">Liegeplatz buchen</p>
+      <p class="h2 mb-5">Liegeplatz buchen</p>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Liegeplatzname</label>
         <input type="text" class="form-control" id="bezeichnung" disabled  v-model="Bezeichnung">
       </div>
-      <div class="row">
-        <div class="mb-3 col">
-          <label for="laenge" class="form-label">Bootslänge in Meter</label>
-          <input type="number" class="form-control" id="laenge" min="1" max="5">
-        </div>
-        <div class="mb-3 col">
-          <label for="breite" class="form-label">Bootsbreite in Meter</label>
-          <input type="number" class="form-control" id="breite" min="1" max="5">
-        </div>
+      <div class="mb-3">
+        <label for="bezeichnung" class="form-label">Boot</label>
+        <div class="input-group">
+        <select class="form-select">
+          <option disabled value="" selected="selected">Bitte Boot auswählen</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <span class="input-group-text" id="basic-addon2" href="#" @click.self="toggleComponent()">+</span>
       </div>
-      <div class="row">
-        <div class="mb-3 col">
-          <label for="tiefgang" class="form-label">Tiefgang in Zentimeter</label>
-          <input type="number" class="form-control" id="tiefgang" min="1" max="5">
-        </div>
-        <div class="mb-3 col">
-          <label for="registrierunsnummer" class="form-label">Boot Registrierungsnummer</label>
-          <input type="text" class="form-control" id="regNum" minlength="1" maxlength="30">
-        </div>
       </div>
+      
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Tagespreis</label>
         <input type="text" class="form-control" id="tagespreis" disabled v-model="Tagespreis">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="border rounded container p-5 text-start mt-5" v-show="visible">
+    <form>
+      <p class="h2 mb-5">Boot anlegen</p>
+      <div class="mb-3">
+        <label for="bezeichnung" class="form-label">Bootsname</label>
+        <input type="text" class="form-control" id="boot_name" v-model="Boot_name">
+      </div>
+      <div class="mb-3">
+        <label for="bezeichnung" class="form-label">Penislänge</label>
+        <input type="text" class="form-control" id="laenge" v-model="Laenge">
+      </div>
+      
+      <div class="mb-3">
+        <label for="tagespreis" class="form-label">Breite</label>
+        <input type="text" class="form-control" id="breite" v-model="Breite">
+      </div>
     </form>
   </div>
 </template>
@@ -45,8 +56,15 @@ export default {
   return{
     Bezeichnung: null,
     Tagespreis: null,
-    BooteDesUsers: null
+    BooteDesUsers: null,
+    visible: false
   };
+},
+methods:{
+  toggleComponent() {
+    console.log(this.visible);
+    this.visible = !this.visible;
+  }
 },
 setup(){
     const { cookies } = useCookies();
@@ -68,15 +86,13 @@ async created(){
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /* .buchung{
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 80%;
-  } */
   button{
     position: relative;
     left: 100%;
     transform: translate(-100%, 0%);
   }
+  span:hover{
+    cursor: pointer;
+  }
 </style>
+
