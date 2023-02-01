@@ -38,6 +38,7 @@
 
 import LiegeplatzListe from '@/components/LiegeplatzListe.vue'
 import axios from 'axios'
+import APIURLService from '../services/API.service';
 
 
 
@@ -72,7 +73,7 @@ export default {
       this.$store.commit('setStartdatum', this.startdatum);
       this.$store.commit('setEnddatum', this.enddatum);
 
-      var res = await axios.post('https://localhost:7082/api/Buchung/GetVerfuegbareLiegeplaetze', {
+      var res = await axios.post(APIURLService.getAPIUrl()+'/api/Buchung/GetVerfuegbareLiegeplaetze', {
                                                                                     bootlaenge: this.bootlaenge,
                                                                                     bootbreite: this.bootbreite,
                                                                                     boottiefgang: this.boottiefgang,

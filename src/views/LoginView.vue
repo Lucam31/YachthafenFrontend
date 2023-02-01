@@ -19,6 +19,7 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import APIURLService from '../services/API.service';
 
 export default {
   name: 'LoginView',
@@ -37,7 +38,7 @@ export default {
   },
   methods: {
     async onLogin(){
-      var res = await axios.post('https://localhost:7082/api/Login/LoginKunde', {email: this.email,
+      var res = await axios.post(APIURLService.getAPIUrl()+'/api/Login/LoginKunde', {email: this.email,
                                                                                  passwort: this.passwort});
 
     this.kunden_id = res.data;

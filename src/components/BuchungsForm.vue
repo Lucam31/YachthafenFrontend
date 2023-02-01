@@ -56,6 +56,7 @@
 
 <script>
 import axios from 'axios'
+import APIURLService from '../services/API.service';
 
 export default {
   name: 'BuchungsForm',
@@ -85,7 +86,7 @@ methods:{
     const enddatum = this.$store.getters.getEnddatum;
     const liegeplatzid = this.$store.getters.getLiegeplatzId;
     console.log(kunden_id);
-    var res = await axios.post('https://localhost:7082/api/Buchung/CreateBuchung',{ kundenid: kunden_id,
+    var res = await axios.post(APIURLService.getAPIUrl()+'/api/Buchung/CreateBuchung',{ kundenid: kunden_id,
                                                                                     liegeplatzid: liegeplatzid,
                                                                                     registrierungsid: this.selected,
                                                                                     start: startdatum,
@@ -102,7 +103,7 @@ methods:{
 
   },
   async onBootAnlegen(){
-    var res = await axios.post('https://localhost:7082/api/Kunden/CreateBoot',{ name: this.Boot_name,
+    var res = await axios.post(APIURLService.getAPIUrl()+'/api/Kunden/CreateBoot',{ name: this.Boot_name,
                                                                                 registrierungsid: this.registrierungsid,
                                                                                 laenge: this.laenge,
                                                                                 breite: this.breite,
@@ -121,7 +122,7 @@ async created(){
 
   //Alle Boote des Users werden gehohlt und in BootedesUsers bereitgestellt
   const kunden_id = this.$store.getters.getKundenId;
-  var res = await axios.get('https://localhost:7082/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
+  var res = await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
   this.BooteDesUsers = res.data;
   
 },

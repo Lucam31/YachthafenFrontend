@@ -70,6 +70,7 @@
   <script>
   // @ is an alias to /src
   import axios from 'axios'
+  import APIURLService from '../services/API.service';
 
   export default {
     name: 'HomeView',
@@ -77,7 +78,7 @@
       
     },
     async created(){
-      this.Buchungen = await (await axios.get('https://localhost:7082/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+      this.Buchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
       
     },
     data() {
