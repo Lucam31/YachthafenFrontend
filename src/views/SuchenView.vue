@@ -30,7 +30,7 @@
       <input type="button" class="input-group-text" value="Suchen" aria-label="Username" aria-describedby="basic-addon1" @click="onsearch">
     </div>
   </div>
-  <LiegeplatzListe v-if="Angebot"></LiegeplatzListe>
+  <LiegeplatzListe v-if="Angebote" :Angebote="Angebote"></LiegeplatzListe>
 </template>
 
 <script>
@@ -52,7 +52,7 @@ export default {
   },
   data() {
   return{
-    Angebot: null,
+    Angebote: null,
     bootlaenge: 1,
     bootbreite: 1,
     boottiefgang: 1,
@@ -78,8 +78,7 @@ export default {
                                                                                     boottiefgang: this.boottiefgang,
                                                                                     startdatum: this.startdatum,
                                                                                     enddatum: this.enddatum});
-
-    this.Angebot = res.data;
+    this.Angebote = res.data;
     
    
     }

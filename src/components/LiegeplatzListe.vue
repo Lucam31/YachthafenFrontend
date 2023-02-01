@@ -16,14 +16,15 @@
 <script>
 export default {
   name: 'LiegeplatzListe',
+  props: ['Angebote'],
 
 data() {
   return{
-    Angebote: this.$parent.Angebot,
+    
   };
 },
 created(){
-  //console.log(this.Angebot);
+  console.log(this.Angebote);
 },
 methods: {
   onNavigate(Angebot){
