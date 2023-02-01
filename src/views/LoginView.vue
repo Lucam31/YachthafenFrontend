@@ -10,7 +10,7 @@
           <input type="text" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
         <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
-        <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton">Register</a></button>
+        <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton" v-on:click.prevent="onRegister">Abmelden TEST Button</a></button>
       </form>
     </div>
   </div>
@@ -19,8 +19,6 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
-import { useCookies } from "vue3-cookies";
-
 
 export default {
   name: 'LoginView',
@@ -28,8 +26,7 @@ export default {
     
   },
   setup(){
-    const { cookies } = useCookies();
-    return { cookies };
+
   },
   data() {
   return{
@@ -44,13 +41,16 @@ export default {
                                                                                  passwort: this.passwort});
 
     this.kunden_id = res.data;
-    console.log(res);
-    this.cookies.set("kunden_id", this.kunden_id);
+
     if(this.kunden_id != "-1"){
+      this.$store.commit('setKundenDaten', res.data);
       this.$router.push('/suchen')
     }else{
       //error Handling einfügen --> Nutzer ist nicht angemeldet
     }
+    },
+    onRegister(){
+      this.$store.commit('clearKundenDaten');
     }
   }
 }

@@ -38,7 +38,7 @@
 
 import LiegeplatzListe from '@/components/LiegeplatzListe.vue'
 import axios from 'axios'
-import { useCookies } from "vue3-cookies";
+
 
 
 export default {
@@ -47,8 +47,8 @@ export default {
     LiegeplatzListe
   },
   setup(){
-    const { cookies } = useCookies();
-    return { cookies };
+
+    
   },
   data() {
   return{
@@ -62,7 +62,7 @@ export default {
   },
 
   created() {
-    const kunden_id = this.cookies.get("kunden_id");
+    const kunden_id = this.$store.getters.getKundenId;
     if(kunden_id == null){
       this.$router.push({name: "login"});
     }

@@ -1,4 +1,8 @@
 import { createStore } from 'vuex'
+import VuexPersistence from 'vuex-persist';
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+});
 
 export default createStore({
     state: {
@@ -6,7 +10,14 @@ export default createStore({
         m_Bezeichnung: null,
         m_Tagespreis: null,
         startdatum: null,
-        enddatum: null
+        enddatum: null,
+        Kundendaten:{
+            kundenId: null,
+            Name: null,
+            Vorname: null,
+            Email: null,
+            Rolle: null,
+        }
       },
     mutations: {
         setLiegeplatzBezeichnung: (state, m_Bezeichnung) =>{          
@@ -23,6 +34,20 @@ export default createStore({
         },
         setEnddatum: (state, enddatum) =>{          
             state.enddatum = enddatum
+        },
+        setKundenDaten: (state, kundendaten)=>{
+            state.Kundendaten.kundenId = kundendaten.m_KundenId;
+            state.Kundendaten.Email = kundendaten.m_Email;
+            state.Kundendaten.Vorname = kundendaten.m_Vorname;
+            state.Kundendaten.Name = kundendaten.m_Name;
+            state.Kundendaten.Rolle = kundendaten.m_Rolle;
+        },
+        clearKundenDaten: (state)=>{
+            state.Kundendaten.kundenId = null;
+            state.Kundendaten.Email = null;
+            state.Kundendaten.Vorname = null;
+            state.Kundendaten.Name = null;
+            state.Kundendaten.Rolle = null;
         }
     },
     actions: {
@@ -43,7 +68,17 @@ export default createStore({
         },
         getEnddatum(state){
             return state.enddatum;
+        },
+        getRolle(state){
+            return state.Kundendaten.Rolle;
+        },
+        getKundenDaten(state){
+            return state.Kundendaten;
+        },
+        getKundenId(state){
+            return state.Kundendaten.kundenId;
         }
-    }
+    },
+    plugins: [vuexLocal.plugin],
     
 })

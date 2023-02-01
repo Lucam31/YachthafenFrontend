@@ -56,7 +56,6 @@
 
 <script>
 import axios from 'axios'
-import { useCookies } from "vue3-cookies";
 
 export default {
   name: 'BuchungsForm',
@@ -81,11 +80,11 @@ methods:{
   },
   async onBuchen(){
     console.log(this.selected);
-    const kunden_id = this.cookies.get("kunden_id").kundenId;
+    const kunden_id = this.$store.getters.getKundenId;
     const startdatum = this.$store.getters.getstartDatum;
     const enddatum = this.$store.getters.getEnddatum;
     const liegeplatzid = this.$store.getters.getLiegeplatzId;
-
+    console.log(kunden_id);
     var res = await axios.post('https://localhost:7082/api/Buchung/CreateBuchung',{ kundenid: kunden_id,
                                                                                     liegeplatzid: liegeplatzid,
                                                                                     registrierungsid: this.selected,
@@ -113,8 +112,7 @@ methods:{
   }
 },
 setup(){
-   const { cookies } = useCookies();
-    return { cookies };
+
   },
 async created(){
 
@@ -122,8 +120,7 @@ async created(){
   this.Tagespreis = this.$store.getters.getLiegeplatzTagespreis;
 
   //Alle Boote des Users werden gehohlt und in BootedesUsers bereitgestellt
-  const kunden_id = this.cookies.get("kunden_id").kundenId;
-  console.log(kunden_id);
+  const kunden_id = this.$store.getters.getKundenId;
   var res = await axios.get('https://localhost:7082/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
   this.BooteDesUsers = res.data;
   

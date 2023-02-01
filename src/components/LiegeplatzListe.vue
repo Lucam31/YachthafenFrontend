@@ -28,7 +28,6 @@ created(){
 methods: {
   onNavigate(Angebot){
     const data = Angebot.Angebot;
-
     this.$store.commit('setLiegeplatzBezeichnung', data.m_Bezeichnung)
     this.$store.commit('setLiegeplatzID', data.m_LiegeplatzId)
     this.$store.commit('setLiegeplatzTagespreis', data.m_Tagespreis)
