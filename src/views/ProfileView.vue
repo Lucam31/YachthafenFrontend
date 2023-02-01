@@ -132,6 +132,7 @@ svg{
  width: 200px;
  height: 170px;
  border-radius: 10px;
+ border: none;
 }
 
 .card:hover .img-section {

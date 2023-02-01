@@ -133,7 +133,8 @@ async created(){
   button{
     position: relative;
     left: 100%;
-    transform: translate(-100%, 0%);
+    transform: translate(-100%, 0);
+    margin: 0;
   }
   span:hover{
     cursor: pointer;
