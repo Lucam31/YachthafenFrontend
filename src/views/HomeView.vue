@@ -78,6 +78,10 @@
       
     },
     async created(){
+      const kunden_id = this.$store.getters.getKundenId;
+    if(kunden_id == null){
+      this.$router.push({name: "login"});
+    }
       this.Buchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
       
     },
