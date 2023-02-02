@@ -2,10 +2,16 @@
     <div class="filter">
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">
-
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 1 16">
+          <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1H1z"/>
+        </svg>
       </span>
       <input type="text" class="form-control" placeholder="Länge" aria-label="Username" aria-describedby="basic-addon1" min="1" max="99" v-model="bootlaenge">
-      <span class="input-group-text" id="basic-addon1">B</span>
+      <span class="input-group-text" id="basic-addon1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 1">
+          <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1H1z"/>
+        </svg>
+      </span>
       <input type="text" class="form-control" placeholder="Breite" aria-label="Username" aria-describedby="basic-addon1" min="1" max="99" v-model="bootbreite">
       <span class="input-group-text" id="basic-addon1">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-half" viewBox="0 0 16 16">
@@ -20,13 +26,13 @@
           <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
         </svg>
       </span>
-      <input type="date" class="form-control" placeholder="Startdatum" aria-label="Username" aria-describedby="basic-addon1" v-model="startdatum">
+      <input type="text" onfocus="(this.type = 'date')" class="form-control" placeholder="Startdatum" aria-label="Username" aria-describedby="basic-addon1" v-model="startdatum">
       <span class="input-group-text" id="basic-addon1">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
           <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
           <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
         </svg></span>
-      <input type="date" class="form-control" placeholder="Enddatum" aria-label="Username" aria-describedby="basic-addon1" v-model="enddatum">
+      <input type="text" onfocus="(this.type = 'date')" class="form-control" placeholder="Enddatum" aria-label="Username" aria-describedby="basic-addon1" v-model="enddatum">
       <input type="button" class="input-group-text" value="Suchen" aria-label="Username" aria-describedby="basic-addon1" @click="onsearch">
     </div>
   </div>

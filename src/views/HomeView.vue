@@ -1,70 +1,69 @@
 <template>
-  
+  <div class="background">
   <div class="mb-3 flex">
     <div class="h2 leftBound">Buchungen</div>
-    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#buchungen" aria-expanded="false" aria-controls="collapseExample">+</span>
+    <span class="h2 rightBound" id="buchungCollapseButton" type="button" data-bs-toggle="collapse" data-bs-target="#buchungen" aria-expanded="false" aria-controls="collapseExample" v-on:click.prevent="changeSign($event)">-</span>
   </div>
-  <div class="collapse" id="buchungen">
-  <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
-    <div class="accordion-item" v-for="Buchung in Buchungen" :key="Buchung.m_BuchungsId">
-      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-          {{Buchung.m_BuchungsId}}
-        </button>
-      </h2>
-      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-        <div class="accordion-body">
-          <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
+  <div class="itemList collapse show" id="buchungen">
+    <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item" v-for="Buchung in Buchungen" :key="Buchung.m_BuchungsId">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+            {{Buchung.m_BuchungsId}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne" onload="setPanelId($event, Buchung)">
+          <div class="accordion-body">
+            <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
+            <button type="submit" class="btn btn-primary cancelButton" v-on:click.prevent="onBootAnlegen">Stornieren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 flex">
+    <div class="h2 leftBound">Vergangene Buchungen</div>
+    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#alteBuchungen" aria-expanded="false" aria-controls="collapseExample" v-on:click.prevent="changeSign($event)">+</span>
+  </div>
+  <div class="itemList collapse" id="alteBuchungen">
+    <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item" v-for="alteBuchung in alteBuchungen" :key="alteBuchung.m_BuchungsId">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+            {{alteBuchung.m_BuchungsId}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <strong>{{alteBuchung.m_Startdatum}} bis zum {{alteBuchung.m_Enddatum}}</strong> Auf Liegeplatz {{ alteBuchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ alteBuchung.m_Boot.m_Name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 flex">
+    <div class="h2 leftBound">Boote</div>
+    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#boote" aria-expanded="false" aria-controls="collapseExample" v-on:click.prevent="changeSign($event)">-</span>
+  </div>
+  <div class="itemList collapse show" id="boote">
+    <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item" v-for="Boot in Boote" :key="Boot.registrierungs_id">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+            {{Boot.registrierungs_id}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <strong>{{Boot.name}} ist {{Boot.laenge}} Meter lang</strong>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-  <div class="mb-3 flex">
-    <div class="h2 leftBound">Vergangene Buchungen</div>
-    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#alteBuchungen" aria-expanded="false" aria-controls="collapseExample">+</span>
-  </div>
-  <div class="collapse" id="alteBuchungen">
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen2-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen2-collapseOne">
-            Accordion Item #1
-          </button>
-        </h2>
-        <div id="panelsStayOpen2-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen2-headingOne">
-          <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen2-headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen2-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            Accordion Item #2
-          </button>
-        </h2>
-        <div id="panelsStayOpen2-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen2-headingTwo">
-          <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen2-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen2-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            Accordion Item #3
-          </button>
-        </h2>
-        <div id="panelsStayOpen2-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen2-headingThree">
-          <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
   
   <script>
@@ -83,25 +82,46 @@
       this.$router.push({name: "login"});
     }
       this.Buchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+      this.Boote = [{registrierungs_id: "abc", name: "Boot1", laenge: "69"}];
       
     },
     data() {
     return{
         Buchungen: null,
     };
-    }
+    },
+    methods:{ 
+      changeSign(el) {
+        console.log(el);
+        if (el.target.innerHTML == "+") {
+          el.target.innerHTML = "-"
+        } else {
+          el.target.innerHTML = "+"
+        }
+      }
+    
+  }
 }
+  
   </script>
   
   <style>
   button{
     margin: 0;
   }
+  .cancelButton{
+    position: relative;
+    float: right;
+  }
   .flex{
     display: flex;
     justify-content: space-between;
   }
   .rightBound{
-    transform: translate(-100%, 0);
+    position: relative;
+    float: right;
+  }
+  .accordion-body{
+    align-items: center;
   }
   </style>
