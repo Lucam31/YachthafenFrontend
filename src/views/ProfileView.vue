@@ -60,7 +60,14 @@
     name: 'ProfileView',
     components: {
       
+    },
+     created(){
+      const kunden_id = this.$store.getters.getKundenId;
+    if(kunden_id == null){
+      this.$router.push({name: "login"});
     }
+      
+    },
   }
   </script>
   
