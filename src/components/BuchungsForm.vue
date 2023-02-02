@@ -23,7 +23,7 @@
         <label for="tagespreis" class="form-label">Tagespreis</label>
         <input type="text" class="form-control" id="tagespreis" disabled v-model="Tagespreis">
       </div>
-      <button type="submit" class="btn btn-primary" v-on:click.prevent="onBuchen">Platz buchen</button>
+      <button type="submit" class="input-group-text" v-on:click.prevent="onBuchen">Platz buchen</button>
     </form>
   </div>
   <div class="border rounded container p-5 text-start mt-5" v-show="visible">
@@ -49,7 +49,7 @@
         <label for="tagespreis" class="form-label">Tiefe</label>
         <input type="text" class="form-control" id="tiefe" v-model="Tiefe">
       </div>
-      <button type="submit" class="btn btn-primary" v-on:click.prevent="onBootAnlegen">Boot speichern</button>
+      <button type="submit" class="input-group-text" v-on:click.prevent="onBootAnlegen">Boot speichern</button>
     </form>
   </div>
 </template>
@@ -131,6 +131,9 @@ async created(){
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container{
+  background-color: #fff;
+}
   button{
     position: relative;
     left: 100%;

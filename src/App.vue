@@ -25,5 +25,19 @@ export default {
 </script>
 
 <style>
-
+.content{
+  position: relative;
+  width: 80%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+body{
+  background-color: #add8e6 ;
+}
 </style>

@@ -1,14 +1,14 @@
 <template>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-custom m-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">Geiler Yachthafen</a>
+    <a class="navbar-brand" href="/home">Yachthafen</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/suchen">Platz suchen</a>
+          <a class="nav-link" aria-current="page" href="/suchen">Platz suchen</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/dashboard" v-if="this.$store.getters.getRolle == 1">Dashboard</a>
@@ -47,24 +47,29 @@
 nav {
   padding: 30px;
   margin-bottom: 4rem;
+  border-radius: 10px;
 }
 
 nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
 }
 
 nav a.router-link-exact-active {
   color: #42b983;
 }
 
-.content{
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 80%;
-  display: block;
-  flex: wrap;
+.bg-custom{
+background: rgba(255, 255, 255, 0.7);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+svg{
+  margin: 0 0 0 1em;
 }
   </style>
   
