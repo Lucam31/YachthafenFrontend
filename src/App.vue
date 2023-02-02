@@ -42,4 +42,8 @@ export default {
 body{
   background-color: #add8e6 ;
 }
+a{
+  text-decoration: none;
+  color: currentColor;
+}
 </style>

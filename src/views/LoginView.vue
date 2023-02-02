@@ -1,13 +1,13 @@
 <template>
   <div class="form">
-    <div class="border rounded container p-5 text-center">
+    <div class="container p-5 text-center">
       <form>
         <p class="h2">Login</p>
         <div class="mb-3">
           <input type="text" class="form-control" id="e-mail" placeholder="E-Mail" v-model="email">
         </div>
         <div class="mb-3">
-          <input type="text" class="form-control" id="password" placeholder="Password" v-model="passwort">
+          <input type="password" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
         <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
         <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton" v-on:click.prevent="onRegister">Abmelden TEST Button</a></button>
@@ -60,6 +60,7 @@ export default {
 <style>
 .form{
   position: relative;
+  width: 20%;
   left: 50%;
   transform: translate(-50%, 0%);
 }
