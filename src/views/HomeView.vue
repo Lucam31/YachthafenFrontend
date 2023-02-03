@@ -7,12 +7,12 @@
   <div class="itemList collapse show" id="buchungen">
     <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
       <div class="accordion-item" v-for="Buchung in Buchungen" :key="Buchung.m_BuchungsId">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+        <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Buchung.m_BuchungsId">
             {{Buchung.m_BuchungsId}}
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne" onload="setPanelId($event, Buchung)">
+        <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId" onload="setPanelId($event, Buchung)">
           <div class="accordion-body">
             <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
             <button type="submit" class="btn btn-primary cancelButton" v-on:click.prevent="onBootAnlegen">Stornieren</button>

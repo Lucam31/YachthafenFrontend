@@ -79,7 +79,10 @@ export default createStore({
             return state.Kundendaten.kundenId;
         },
         getNameVorname(state){
-            return state.Kundendaten.Vorname + ' ' +state.Kundendaten.Name;
+            if(state.Kundendaten.Name != null){
+                return state.Kundendaten.Vorname + ' ' +state.Kundendaten.Name;
+            }
+            
         }
     },
     plugins: [vuexLocal.plugin],

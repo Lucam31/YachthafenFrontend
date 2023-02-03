@@ -1,5 +1,5 @@
 <template>
-    <NavBar></NavBar>
+    <NavBar v-if="this.$store.getters.getKundenId != null"></NavBar>
 <div class="content">
   <router-view/>
 </div>
@@ -8,13 +8,18 @@
 <script>
 // @ is an alias to /src
 import NavBar from '@/components/NavBar.vue'
+
   
 export default {
   name: 'App',
   components: {
     NavBar
   },
-  setup(){
+  created(){
+    const kunden_id = this.$store.getters.getKundenId;
+    if(kunden_id == null){
+      this.$router.push({name: "login"});
+    }
   },
   data() {
   return{

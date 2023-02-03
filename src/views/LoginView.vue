@@ -10,7 +10,6 @@
           <input type="password" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
         <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
-        <button type="submit" class="btn btn-primary"><a href="/register" class="registerButton" v-on:click.prevent="onRegister">Abmelden TEST Button</a></button>
       </form>
     </div>
   </div>
@@ -49,9 +48,6 @@ export default {
     }else{
       //error Handling einfügen --> Nutzer ist nicht angemeldet
     }
-    },
-    onRegister(){
-      this.$store.commit('clearKundenDaten');
     }
   }
 }
