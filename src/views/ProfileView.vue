@@ -43,10 +43,10 @@
             </div>
         <div class="col-md-4">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Passwort ändern</span></div><br>
-                <div class="col-md-12"><label class="labels">Neues Passwort</label><input type="password" class="form-control" placeholder="Passwort" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Passwort bestätigen</label><input type="password" class="form-control" placeholder="Passwort bestätigen" value=""></div>
-                <div class="mt-3 text-center"><button class="input-group-text saveButton" type="button">Ändern</button></div>
+              <div class="d-flex justify-content-between align-items-center experience"><span>Passwort ändern</span></div><br>
+              <div class="col-md-12"><label class="labels">Neues Passwort</label><input type="password" class="form-control" placeholder="Passwort" value=""></div> <br>
+              <div class="col-md-12"><label class="labels">Passwort bestätigen</label><input type="password" class="form-control" placeholder="Passwort bestätigen" value=""></div>
+              <div class="mt-3 text-center"><button class="input-group-text saveButton" type="button">Ändern</button></div>
             </div>
         </div>
         </div>
