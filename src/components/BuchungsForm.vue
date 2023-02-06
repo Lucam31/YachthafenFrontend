@@ -6,11 +6,21 @@
         <label for="bezeichnung" class="form-label">Liegeplatzname</label>
         <input type="text" class="form-control" id="bezeichnung" disabled  v-model="Bezeichnung">
       </div>
+      <div class="row mt-4 mb-4">
+        <div class="col">
+        <label for="bezeichnung" class="form-label">Startdatum</label>
+        <input type="date" class="form-control" id="startdatum" placeholder="Startdatum" v-model="Startdatum" v-on:change="getFullPrice">
+        </div>
+        <div class="col">
+        <label for="bezeichnung" class="form-label">Enddatum</label>
+        <input type="date" class="form-control" id="enddatum" placeholder="Enddatum" v-model="Enddatum" v-on:change="getFullPrice">
+        </div>
+      </div>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Boot</label>
         <div class="input-group">
         <select class="form-select" v-model="selected">
-          <option :value="-1">Bitte Boot wählen oder Anlegen</option>        
+          <option :value="-1" disabled>Bitte Boot wählen oder Anlegen</option>        
           <option v-for="Boot in BooteDesUsers" v-bind:key="Boot.m_RegistrierungsId" v-bind:value="Boot.m_RegistrierungsId">
             {{Boot.m_Name}}
         </option>
@@ -22,6 +32,10 @@
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Tagespreis</label>
         <input type="text" class="form-control" id="tagespreis" disabled v-model="Tagespreis">
+      </div>
+      <div class="mb-3">
+        <label for="tagespreis" class="form-label">Gesamtpreis</label>
+        <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
       </div>
       <button type="submit" class="input-group-text" v-on:click.prevent="onBuchen">Platz buchen</button>
     </form>
@@ -72,12 +86,23 @@ export default {
     Laenge: null,
     Breite: null,
     Tiefe: null,
-    registrierungsid: null
+    registrierungsid: null,
+    Startdatum: null,
+    Enddatum: null,
+    Gesamtpreis: null
   };
 },
 methods:{
   toggleComponent() {
     this.visible = !this.visible;
+  },
+  getFullPrice() {
+    var day1 = new Date(this.Startdatum);
+    var day2 = new Date(this.Enddatum);
+    var dif = Math.abs(day2 - day1);
+    var days = dif/(1000*3600*24)
+    console.log(days)
+    this.Gesamtpreis = this.Tagespreis * days;
   },
   async onBuchen(){
     console.log(this.selected);
@@ -119,11 +144,15 @@ async created(){
 
   this.Bezeichnung = this.$store.getters.getLiegeplatzBezeichnung;
   this.Tagespreis = this.$store.getters.getLiegeplatzTagespreis;
+  this.Startdatum = this.$store.getters.getstartDatum;
+  this.Enddatum = this.$store.getters.getEnddatum;
 
   //Alle Boote des Users werden gehohlt und in BootedesUsers bereitgestellt
   const kunden_id = this.$store.getters.getKundenId;
   var res = await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
   this.BooteDesUsers = res.data;
+
+  this.getFullPrice()
   
 },
 }

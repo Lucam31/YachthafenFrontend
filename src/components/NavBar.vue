@@ -29,6 +29,9 @@
 
             <ul class="dropdown-menu">
               <li>
+                <a class="dropdown-item" aria-current="page" href="/buchungen">Buchungen</a>
+              </li>
+              <li>
                 <a class="dropdown-item" href="/profile">Profil Bearbeiten</a>
               </li>
               <li>

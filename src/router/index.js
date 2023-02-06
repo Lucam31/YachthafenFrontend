@@ -4,8 +4,9 @@ import BuchenView from '../views/BuchenView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import HomeView from '../views/HomeView.vue'
+import BuchungenView from '../views/BuchungenView.vue'
 import ProfileView from '../views/ProfileView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: DashboardView
+  },
+  {
+    path: '/buchungen',
+    name: 'buchungen',
+    component: BuchungenView
   },
   {
     path: '/home',
