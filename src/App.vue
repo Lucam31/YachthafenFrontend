@@ -1,6 +1,6 @@
 <template>
     <NavBar v-if="this.$store.getters.getKundenId != null"></NavBar>
-<div class="content">
+<div class="content" :class="{'loginContent': isLoginView}">
   <router-view/>
 </div>
 </template>
@@ -15,6 +15,11 @@ export default {
   components: {
     NavBar
   },
+  computed: {
+		isLoginView() {
+			return this.$route.name === 'login';
+		}
+	},
   created(){
     const kunden_id = this.$store.getters.getKundenId;
     if(kunden_id == null){
@@ -35,7 +40,7 @@ export default {
   width: 80%;
   left: 50%;
   transform: translate(-50%, 0);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
@@ -44,8 +49,15 @@ export default {
   margin: 5em 0;
   padding: 3em;
 }
+.loginContent{
+  width: 35%;
+}
 body{
   background-color: #add8e6 ;
+  background-image: url('../img/bg2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 a{
   text-decoration: none;

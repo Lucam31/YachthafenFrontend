@@ -83,14 +83,7 @@
   export default {
     name: 'DashboardView',
     components: { Bar },
-    computed: {
-      barStyle () {
-        return {
-          width: '100%',
-          height: '100%'
-        }
-      }
-    },
+    
     data: () => ({
       loaded: true, //false wenn Daten erst geladen werden (von API)
       chartData: {
@@ -112,7 +105,6 @@
           this.chartData.datasets.data = last;
         }
         console.log(this.chartData.datasets.data)
-        this.renderChart(this.chartData, this.options);
       }
     }
 
@@ -239,5 +231,8 @@ svg{
  word-break: break-all;
 }
 
+.dashboard-bar{
+  width: 100%;
+}
 
   </style> 

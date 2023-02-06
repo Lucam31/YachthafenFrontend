@@ -83,7 +83,7 @@
       }
       this.Buchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
       this.alteBuchungen = [{m_BuchungsId: "abc", m_Bezeichnung: "LP3", m_Boot: "69", m_Startdatum: "23.01.2023", m_Enddatum: "01.02.2023"},{m_BuchungsId: "def", m_Bezeichnung: "LP4", m_Boot: "79", m_Startdatum: "23.01.2023", m_Enddatum: "01.02.2023"}];
-      // this.alteBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetVergangeneBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+      //this.alteBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetVergangeneBuchungenFromKunde?kundenId=' + kunden_id)).data;
       var res = await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
       this.Boote = await res.data;
       
@@ -91,6 +91,8 @@
     data() {
     return{
         Buchungen: null,
+        alteBuchungen: null,
+        Boote: null
     };
     },
     methods:{ 

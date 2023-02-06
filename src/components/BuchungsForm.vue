@@ -52,7 +52,7 @@
         <input type="text" class="form-control" id="boot_name" v-model="Boot_name">
       </div>
       <div class="mb-3">
-        <label for="bezeichnung" class="form-label">Penislänge</label>
+        <label for="bezeichnung" class="form-label">Länge</label>
         <input type="text" class="form-control" id="laenge" v-model="Laenge">
       </div>      
       <div class="mb-3">

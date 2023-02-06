@@ -53,10 +53,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .form{
   position: relative;
-  width: 20%;
+  width: 100%;
   left: 50%;
   transform: translate(-50%, 0%);
 }
@@ -72,4 +72,5 @@ button{
   text-decoration: none;
   color: white;
 }
+
 </style>
