@@ -7,6 +7,7 @@ import DashboardView from '../views/DashboardView.vue'
 import BuchungenView from '../views/BuchungenView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import HomeView from '../views/HomeView.vue'
+import PlatzverwaltungView from '../views/PlatzverwaltungView.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/buchungen',
     name: 'buchungen',
     component: BuchungenView
+  },
+  {
+    path: '/verwaltung',
+    name: 'verwaltung',
+    component: PlatzverwaltungView
   },
   {
     path: '/',

@@ -9,8 +9,8 @@
         <div class="mb-3">
           <input type="password" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
-        <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
-        <button type="submit" class="btn btn-primary" v-on:click.prevent="onRegistrieren">Registrieren</button>
+        <button type="submit" class="btn btn-primary mb-2 mt-2" v-on:click.prevent="onLogin">Login</button>
+        <button type="submit" class="btn btn-primary mb-2 mt-2" v-on:click.prevent="onRegistrieren">Registrieren</button>
       </form>
     </div>
   </div>
