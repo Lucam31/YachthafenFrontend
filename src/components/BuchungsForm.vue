@@ -148,7 +148,9 @@ methods:{
                                                                                 registrierungsid: this.registrierungsid,
                                                                                 laenge: this.Laenge,
                                                                                 breite: this.Breite,
-                                                                                tiefe: this.Tiefe});
+                                                                                tiefe: this.Tiefe,
+                                                                                benutzerId: this.$store.getters.getKundenId
+                                                                                });
     console.log(res.data);
     this.created();
   }

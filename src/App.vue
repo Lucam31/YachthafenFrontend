@@ -1,5 +1,5 @@
 <template>
-    <NavBar v-if="this.$store.getters.getKundenId != null"></NavBar>
+    <NavBar></NavBar>
 <div class="content" :class="{'loginContent': isLoginView}">
   <router-view/>
 </div>
@@ -24,10 +24,7 @@ export default {
 		}
 	},
   created(){
-    const kunden_id = this.$store.getters.getKundenId;
-    if(kunden_id == null){
-      this.$router.push({name: "login"});
-    }
+
   },
   data() {
   return{

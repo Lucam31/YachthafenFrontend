@@ -45,10 +45,9 @@
           </div>
           <div class="card-desc">
             <div class="card-header">
-              <div class="card-title">Auslastung<br>heute</div>
+              <div class="card-title">Jahresumsatz</div>
             </div>
-          <div class="card-percent">50%</div>
-          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+          <div class="card-percent">{{Jahresumsatz}}</div>
         </div>
       </div>      
       <div class="card work">
@@ -101,11 +100,11 @@
       },
       AuslastungheuteProzent: 0,
       AuslastungInsgesamt: 0,
-      AuslastungBelegt: 0
+      AuslastungBelegt: 0,
+      Jahresumsatz: 0
     }),
     async created(){
-      const res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetAktuelleAuslastung');
-
+      var res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetAktuelleAuslastung');
       this.AuslastungBelegt = res.data.akt;
       this.AuslastungInsgesamt = res.data.max;
       if(res.data.akt == 0){
@@ -113,6 +112,9 @@
       }else {
         this.AuslastungheuteProzent = (res.akt / res.max) * 100;
       }
+      //----------------------------------------
+      res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetJahresUmsatz');
+      this.Jahresumsatz = res.data;
     },
     methods:{
       updateChartData(vals) {
