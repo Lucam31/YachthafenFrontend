@@ -45,9 +45,9 @@
           </div>
           <div class="card-desc">
             <div class="card-header">
-              <div class="card-title">Jahresumsatz</div>
+              <div class="card-title">Jahresumsatz bis lang</div>
             </div>
-          <div class="card-percent">{{Jahresumsatz}}</div>
+          <div class="card-percent">{{Jahresumsatz}} €</div>
         </div>
       </div>      
       <div class="card work">

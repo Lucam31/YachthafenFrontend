@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         async onDatenSpeichern() {
-            await axios.post(APIURLService.getAPIUrl() + '/api/Kunde/UpdateKunde', {
+            await axios.post(APIURLService.getAPIUrl() + '/api/Kunden/UpdateKunde', {
                 kundeId: this.$store.getters.getKundenId,
                 name: this.Name,
                 vorname: this.Vorname,
@@ -97,7 +97,7 @@ export default {
         },
         async onPasswortSpeichern(){
             if(this.Passwort1 == this.Passwort2){
-                await axios.post(APIURLService.getAPIUrl() + '/api/Kunde/UpdateKunde', {
+                await axios.post(APIURLService.getAPIUrl() + '/api/Kunden/UpdateKunde', {
                 kundeId: this.$store.getters.getKundenId,
                 name: this.Name,
                 vorname: this.Vorname,
