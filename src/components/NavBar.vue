@@ -12,7 +12,10 @@
             <a class="nav-link" aria-current="page" href="/suchen">Platz suchen</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard" v-if="this.$store.getters.getRolle == 1">Dashboard</a>
+            <a class="nav-link" href="/dashboard" v-if="this.$store.getters.getRolle == 2">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/verwaltung" v-if="this.$store.getters.getRolle == 2">Liegeplatzverwaltung</a>
           </li>
         </ul>
         <li class="nav-link">
