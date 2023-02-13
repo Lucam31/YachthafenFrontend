@@ -45,7 +45,7 @@ const routes = [
     component: BuchungenView
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
   }
