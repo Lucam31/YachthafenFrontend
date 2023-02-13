@@ -92,6 +92,7 @@ export default {
                 email: this.Email,
                 Passwort: null
             });
+            this.updateStore();
 
         },
         async onPasswortSpeichern(){
@@ -103,10 +104,20 @@ export default {
                 email: this.Email,
                 Passwort: this.Passwort1
             });
+                this.updateStore();
             }else{
                 console.log("kracht");
                 this.PasswortMaching = false;
             }
+        },
+        updateStore(){
+            var kundendaten = {
+                m_Email: this.Email,
+                m_Vorname: this.Vorname,
+                m_Name: this.Name
+            }
+
+            this.$store.commit('setKundenDaten', kundendaten);
         }
     }
 }

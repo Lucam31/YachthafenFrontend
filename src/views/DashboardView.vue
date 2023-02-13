@@ -19,8 +19,8 @@
             <div class="card-header">
               <div class="card-title">Auslastung<br>heute</div>
             </div>
-          <div class="card-percent">50%</div>
-          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+          <div class="card-percent">{{AuslastungheuteProzent}} %</div>
+          <p class="recent">Insgesamt: {{ AuslastungInsgesamt }} | Belegt: {{ AuslastungBelegt }}</p>
           </div>
         </div>
         <div class="card work" @click="updateChartData('temps')">
@@ -79,6 +79,9 @@
   import { Bar } from 'vue-chartjs'
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+  import axios from 'axios'
+  import APIURLService from '../services/API.service';
   
   export default {
     name: 'DashboardView',
@@ -95,8 +98,22 @@
             data: [7, 12, 15, 20, 24, 29, 39, 30, 22, 10, 8, 6]
           }
         ]  //chartData null wenn Daten geladen werden
-      }
+      },
+      AuslastungheuteProzent: 0,
+      AuslastungInsgesamt: 0,
+      AuslastungBelegt: 0
     }),
+    async created(){
+      const res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetAktuelleAuslastung');
+
+      this.AuslastungBelegt = res.data.akt;
+      this.AuslastungInsgesamt = res.data.max;
+      if(res.data.akt == 0){
+        this.AuslastungheuteProzent = 0;    
+      }else {
+        this.AuslastungheuteProzent = (res.akt / res.max) * 100;
+      }
+    },
     methods:{
       updateChartData(vals) {
         if (vals == "temps") {
@@ -105,6 +122,7 @@
           this.chartData.datasets.data = last;
         }
         console.log(this.chartData.datasets.data)
+        
       }
     }
 
