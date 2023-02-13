@@ -1,6 +1,5 @@
 <template>
-    <div class="form">
-      <div class="border rounded container p-5 text-center">
+    <div class="form text-center">
         <form>
           <p class="h2">Registrierung</p>
           <div class="row mt-4 mb-4">
@@ -17,9 +16,8 @@
           <div class="mb-4">
             <input type="text" class="form-control" id="password" placeholder="Password">
           </div>
-          <button type="submit" class="input-group-text">Register</button>
+          <button type="submit" class="btn btn-primary">Register</button>
         </form>
-      </div>
     </div>
   </template>
   
@@ -35,10 +33,5 @@
   </script>
   
   <style>
-  .form{
-    position: relative;
-    width: 45%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-  }
+  
   </style>

@@ -13,9 +13,35 @@
           </button>
         </h2>
         <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
-          <div class="accordion-body flex-accordion">
-            <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
+          <div class="accordion-body">
+
+            
+            <div class="mb-3 title">
+              <p class="h3 mb-5">Buchung {{ Buchung.m_BuchungsId }}</p>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="liegeplatz" class="form-label">Liegeplatz</label>
+                <input type="text" class="form-control" id="l_name" disabled :value="Buchung.m_Liegeplatz.m_Bezeichnung">
+              </div>
+              <div class="mb-3 col">
+                <label for="boot" class="form-label">Boot</label>
+                <input type="text" class="form-control" id="b_name" disabled :value="Buchung.m_Boot.m_Name">
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="ende" class="form-label">Startdatum</label>
+                <input type="text" class="form-control" id="start" disabled :value="Buchung.m_Startdatum">
+              </div>      
+              <div class="mb-3 col">
+                <label for="start" class="form-label">Enddatum</label>
+                <input type="text" class="form-control" id="ende" disabled :value="Buchung.m_Enddatum">
+              </div>
+            </div>
             <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBuchungStornieren({Buchung})">Stornieren</button>
+
+
           </div>
         </div>
       </div>
@@ -35,8 +61,32 @@
           </button>
         </h2>
         <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
-          <div class="accordion-body flex-accordion">
-            <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
+          <div class="accordion-body">
+            
+            <div class="mb-3 title">
+              <p class="h3 mb-5">Buchung {{ Buchung.m_BuchungsId }}</p>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="liegeplatz" class="form-label">Liegeplatz</label>
+                <input type="text" class="form-control" id="l_name" disabled :value="Buchung.m_Liegeplatz.m_Bezeichnung">
+              </div>
+              <div class="mb-3 col">
+                <label for="boot" class="form-label">Boot</label>
+                <input type="text" class="form-control" id="b_name" disabled :value="Buchung.m_Boot.m_Name">
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="ende" class="form-label">Startdatum</label>
+                <input type="text" class="form-control" id="start" disabled :value="Buchung.m_Startdatum">
+              </div>      
+              <div class="mb-3 col">
+                <label for="start" class="form-label">Enddatum</label>
+                <input type="text" class="form-control" id="ende" disabled :value="Buchung.m_Enddatum">
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -57,7 +107,36 @@
         </h2>
         <div :id="'panelsStayOpen-collapse'+Boot.m_RegistrierungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Boot.m_RegistrierungsId">
           <div class="accordion-body">
-            <strong>{{Boot.m_Name}} ist {{Boot.m_Laenge}} Meter lang und {{ Boot.m_Breite }} Meter breit</strong>
+
+
+            
+            <div class="mb-3 title">
+              <p class="h3 mb-5">Boot {{ Boot.m_Name }}</p>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="b_name" class="form-label">Bootsname</label>
+                <input type="text" class="form-control" id="b_name" disabled :value="Boot.m_Name">
+              </div>
+              <div class="mb-3 col">
+                <label for="laenge" class="form-label">Länge</label>
+                <input type="text" class="form-control" id="laenge" disabled :value="Boot.m_Laenge">
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="breite" class="form-label">Breite</label>
+                <input type="text" class="form-control" id="breite" disabled :value="Boot.m_Breite">
+              </div>      
+              <div class="mb-3 col">
+                <label for="tiefgang" class="form-label">Tiefgang</label>
+                <input type="text" class="form-control" id="tiefgang" disabled :value="Boot.m_Tiefgang">
+              </div>
+            </div>
+            <button type="submit" class="input-group-text cancelButton">Löschen</button>
+
+
+
           </div>
         </div>
       </div>
@@ -123,11 +202,13 @@
     display: flex;
     flex-wrap: wrap;
   }
+  .title{
+    width: 100%;
+  }
   .cancelButton{
-    position: absolute;
-    right: 0;
-    transform: translate(-50%, 0);
-    margin-right: 10px;
+    position: relative;
+    left: 100%;
+    transform: translate(-100%, 0%);
   }
   .flex{
     display: flex;

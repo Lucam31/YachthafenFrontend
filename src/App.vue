@@ -17,7 +17,10 @@ export default {
   },
   computed: {
 		isLoginView() {
-			return this.$route.name === 'login';
+      if (this.$route.name === 'login' || this.$route.name === 'register') {
+        return true;
+      }
+      return false;
 		}
 	},
   created(){
