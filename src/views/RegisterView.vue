@@ -16,7 +16,7 @@
           <div class="mb-4">
             <input type="text" class="form-control" id="password" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary">Registrieren</button>
         </form>
     </div>
   </template>
