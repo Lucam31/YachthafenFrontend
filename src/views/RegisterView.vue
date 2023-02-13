@@ -16,8 +16,10 @@
           <div class="mb-4">
             <input type="text" class="form-control" id="password" placeholder="Password" v-model="Passwort">
           </div>
-          <button type="submit" class="btn btn-primary" v-on:click.prevent="onRegistrieren">Registrieren</button>
-          <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
+          <div class="buttons">
+            <span type="submit" class="login" v-on:click.prevent="onLogin"> &lt;- Login</span>
+            <button type="submit" class="btn btn-primary register" v-on:click.prevent="onRegistrieren">Registrieren</button>
+          </div>
         </form>
     </div>
   </template>
@@ -55,6 +57,16 @@
   }
   </script>
   
-  <style>
-  
+  <style scoped>
+  .buttons{
+    display: flex;
+  }
+    .login{
+      float: left;
+    }
+    .register{
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
   </style>

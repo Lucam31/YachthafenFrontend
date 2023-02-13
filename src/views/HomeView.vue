@@ -7,16 +7,16 @@
       <div class="aboutHeader">
         <h2>Ihre Anlegestelle ins Urlaubsglück</h2>
       </div>
-      <div class="text">
+      <div class="text text-size">
         <p>
           Wir bieten Ihnen 10 komfortable Liegeplätze die sowohl für spontane Kurzzeitlieger als auch für Dauerlieger geeignet sind. 
           In direkter Nähe zum Schwendier Bus-Bahnhof haben Sie eine schnelle Anbindung zu allen Attraktionen, die Schwendi zu bieten hat.
         </p> 
       </div>
-      <div class="list">
+      <div class="list text-size">
         <ul>
-          <li>15 m maximale Länge</li>
-          <li>5.5 m maximale Breite</li>
+          <li>20 m maximale Länge</li>
+          <li>20 m maximale Breite</li>
           <li>Brauch- und Trinkwasserzapfstelle</li>
           <li>230 V Stromanschlüsse</li>
         </ul>
@@ -26,7 +26,7 @@
       <div class="picContainer">
         <div class="pic1"><img src="../../img/restaurant.jpg" alt="Bild nicht gefunden"></div>
       </div>
-      <div class="beschreibung">
+      <div class="beschreibung text-size">
         <p>Während Ihres Aufenthalts haben Sie die Möglichkeit Ihren Abend in einem der Restaurants am Yachthafen oder in unserem illegalen Casino zu verbringen.</p>
       </div>
       <div class="picContainer">
@@ -68,10 +68,10 @@
     margin-bottom: 5em;
   }
   .aboutHeader{
-    width: 20%;
+    width: 30%;
   }
   .text{
-    width: 60%;
+    width: 40%;
   }
   .text p{
     position: relative;
@@ -80,19 +80,22 @@
     width: 70%;
   }
   .list{
-    width: 20%;
+    width: 30%;
   }
   .angebote{
     display: flex;
   }
   .beschreibung{
+    display: flex;
     width: 40%;
+    align-items: center;
   }
   .beschreibung p{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
     width: 70%;
+    text-align: center;
   }
   .picContainer{
     display: flex;
@@ -101,5 +104,8 @@
   }
   img{
     width: 100%;
+  }
+  .text-size{
+    font-size: 18px;
   }
   </style>

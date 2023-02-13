@@ -1,10 +1,9 @@
 <template>
-    <div class="background">
     <div class="mb-3 flex">
       <div class="h2 leftBound">Liegeplätze</div>
       <button class="btn-primary btn" id="basic-addon2" href="#" v-on:click.prevent="toggleComponent()">Anlegen</button>
     </div>
-    <div class="border rounded container p-5 text-start mt-5" v-show="visible">
+    <div class="border rounded div-box p-5 text-start mt-5 mb-5" v-show="visible">
         <form>
             <p class="h2 mb-5">Liegeplatz anlegen</p>
             <div class="row mt-4 mb-4">
@@ -16,21 +15,33 @@
             <div class="row mt-4 mb-4">
                 <div class="mb-3 col">
                     <label for="laenge" class="form-label">Länge</label>
-                    <input type="text" class="form-control" id="laenge" v-model="Laenge">
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="laenge" v-model="Laenge">
+                      <span class="input-group-text" id="basic-addon2">m</span>
+                    </div>
                 </div>
                 <div class="mb-3 col">
                     <label for="breite" class="form-label">Breite</label>
-                    <input type="text" class="form-control" id="breite" v-model="Breite">
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="breite" v-model="Breite">
+                      <span class="input-group-text" id="basic-addon2">m</span>
+                    </div>
                 </div>      
             </div>
             <div class="row mt-4 mb-4">
                 <div class="mb-3 col">
                     <label for="tiefgang" class="form-label">Tiefgang</label>
-                    <input type="text" class="form-control" id="tiefgang" v-model="Tiefgang">
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="tiefgang" v-model="Tiefgang">
+                      <span class="input-group-text" id="basic-addon2">cm</span>
+                    </div>
                 </div>
                 <div class="mb-3 col">
                     <label for="tagespreis" class="form-label">Tagespreis</label>
-                    <input type="text" class="form-control" id="tagespreis" v-model="Tagespreis">
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="tagespreis" v-model="Tagespreis">
+                      <span class="input-group-text" id="basic-addon2">€</span>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="input-group-text createButton" v-on:click.prevent="onLiegeplatzAnlegen">Liegeplatz speichern</button>
@@ -50,7 +61,7 @@
                 
               <div class="row mt-4 mb-4">
                 <div class="mb-3 title">
-                    <p class="h3 mb-5">Liegeplatz {{ Liegeplatz.m_Bezeichnung }}</p>
+                    <p class="h3 mb-3">Liegeplatz {{ Liegeplatz.m_Bezeichnung }}</p>
                 </div>
                 </div>
               <div class="row mt-4 mb-4">
@@ -79,16 +90,15 @@
                   <input type="text" class="form-control" id="tagespreis" v-model="Liegeplatz.m_Tagespreis">
                 </div>
               </div>
-              <div class="mb-3">
-                <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onLiegeplatzSpeichern({Liegeplatz})">Speichern</button>
-                <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onLiegeplatzLoeschen({Liegeplatz})">Löschen</button>
+              <div class="mb-3 buttons">
+                <button type="submit" class="input-group-text editButton" v-on:click.prevent="onLiegeplatzSpeichern({Liegeplatz})">Speichern</button>
+                <button type="submit" class="input-group-text editButton" v-on:click.prevent="onLiegeplatzLoeschen({Liegeplatz})">Löschen</button>
               </div>
   
             </div>
           </div>
         </div>
       </div>
-    </div>
   </template>
     
     <script>
@@ -159,12 +169,19 @@
     
     </script>
     
-    <style>
+    <style scoped>
     .createButton{
-        position: relative;
-    left: 100%;
-    transform: translate(-100%, 0);
-    margin: 0;
+      position: relative;
+      left: 100%;
+      transform: translate(-100%, 0);
+      margin: 0;
+    }
+    .buttons{
+      display: flex;
+      justify-content: end;
+    }
+    .editButton{
+      margin: 5px;
     }
     .flex-accordion{
       display: flex;
@@ -172,11 +189,6 @@
     }
     .title{
       width: 100%;
-    }
-    .cancelButton{
-      position: relative;
-      left: 100%;
-      transform: translate(-100%, 0%);
     }
     .flex{
       display: flex;
@@ -189,7 +201,7 @@
     .accordion-body{
       align-items: center;
     }
-    .container{
+    .div-box{
     background-color: #fff;
     }
     </style>
