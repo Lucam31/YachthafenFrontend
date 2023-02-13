@@ -6,7 +6,7 @@
   </div>
   <div class="itemList collapse show" id="buchungen">
     <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item" v-for="Buchung in Buchungen" :key="Buchung.m_BuchungsId">
+      <div class="accordion-item" v-for="Buchung in zukuenftigeBuchungen" :key="Buchung.m_BuchungsId">
         <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Buchung.m_BuchungsId">
             {{Buchung.m_BuchungsId}}
@@ -15,7 +15,7 @@
         <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
           <div class="accordion-body flex-accordion">
             <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
-            <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBootAnlegen">Stornieren</button>
+            <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBuchungStornieren({Buchung})">Stornieren</button>
           </div>
         </div>
       </div>
@@ -28,15 +28,15 @@
   </div>
   <div class="itemList collapse" id="alteBuchungen">
     <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item" v-for="alteBuchung in alteBuchungen" :key="alteBuchung.m_BuchungsId">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapseOne'+alteBuchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapseOne'+alteBuchung.m_BuchungsId">
-            {{alteBuchung.m_BuchungsId}}
+      <div class="accordion-item" v-for="Buchung in alteBuchungen" :key="Buchung.m_BuchungsId">
+        <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Buchung.m_BuchungsId">
+            {{Buchung.m_BuchungsId}}
           </button>
         </h2>
-        <div :id="'panelsStayOpen-collapseOne'+alteBuchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-headingOne'+alteBuchung.m_BuchungsId">
-          <div class="accordion-body">
-            <strong>{{alteBuchung.m_Startdatum}} bis zum {{alteBuchung.m_Enddatum}}</strong> Auf Liegeplatz {{ alteBuchung.m_Bezeichnung }} mit Boot {{ alteBuchung.m_Boot }}
+        <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
+          <div class="accordion-body flex-accordion">
+            <strong>{{Buchung.m_Startdatum}} bis zum {{Buchung.m_Enddatum}}</strong> Auf Liegeplatz {{ Buchung.m_Liegeplatz.m_Bezeichnung }} mit Boot {{ Buchung.m_Boot.m_Name }}
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="accordion-item" v-for="Boot in Boote" v-bind:key="Boot.m_RegistrierungsId" v-bind:value="Boot.m_RegistrierungsId">
         <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Boot.m_RegistrierungsId">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Boot.m_RegistrierungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Boot.m_RegistrierungsId">
-            {{Boot.m_RegistrierungsId}}
+            {{Boot.m_Name}}
           </button>
         </h2>
         <div :id="'panelsStayOpen-collapse'+Boot.m_RegistrierungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Boot.m_RegistrierungsId">
@@ -81,16 +81,16 @@
       if(kunden_id == null){
         this.$router.push({name: "login"});
       }
-      this.Buchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
-      this.alteBuchungen = [{m_BuchungsId: "abc", m_Bezeichnung: "LP3", m_Boot: "69", m_Startdatum: "23.01.2023", m_Enddatum: "01.02.2023"},{m_BuchungsId: "def", m_Bezeichnung: "LP4", m_Boot: "79", m_Startdatum: "23.01.2023", m_Enddatum: "01.02.2023"}];
-      //this.alteBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetVergangeneBuchungenFromKunde?kundenId=' + kunden_id)).data;
+      this.zukuenftigeBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetZukuenftigeBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+      this.alteBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetVergangeneBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+
       var res = await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
       this.Boote = await res.data;
       
     },
     data() {
     return{
-        Buchungen: null,
+        zukuenftigeBuchungen: null,
         alteBuchungen: null,
         Boote: null
     };
@@ -102,6 +102,12 @@
         } else {
           el.target.innerHTML = "+"
         }
+      },
+      async onBuchungStornieren(Buchung){
+
+        this.zukuenftigeBuchungen = await (await axios.post(APIURLService.getAPIUrl()+'/api/Buchung/StorniereBuchung?BuchungsId=' + Buchung.Buchung.m_BuchungsId));
+
+        this.zukuenftigeBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetZukuenftigeBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
       }
     
   }
