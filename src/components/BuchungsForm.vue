@@ -121,7 +121,7 @@ methods:{
     console.log(res.data);
     if(res.data != -1){
       //buchung Erfolg
-      //TODO was passiert jetzt
+      this.$router.push('/buchungen')
     }else{
       //buchung klappte nichtz
     }
