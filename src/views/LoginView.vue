@@ -10,6 +10,7 @@
           <input type="password" class="form-control" id="password" placeholder="Password" v-model="passwort">
         </div>
         <button type="submit" class="btn btn-primary" v-on:click.prevent="onLogin">Login</button>
+        <button type="submit" class="btn btn-primary" v-on:click.prevent="onRegistrieren">Registrieren</button>
       </form>
     </div>
   </div>
@@ -48,6 +49,9 @@ export default {
     }else{
       //error Handling einfügen --> Nutzer ist nicht angemeldet
     }
+    },
+    onRegistrieren(){
+      this.$router.push('/register')
     }
   }
 }

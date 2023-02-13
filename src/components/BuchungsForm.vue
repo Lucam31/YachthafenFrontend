@@ -130,9 +130,9 @@ methods:{
   async onBootAnlegen(){
     var res = await axios.post(APIURLService.getAPIUrl()+'/api/Kunden/CreateBoot',{ name: this.Boot_name,
                                                                                 registrierungsid: this.registrierungsid,
-                                                                                laenge: this.laenge,
-                                                                                breite: this.breite,
-                                                                                tiefe: this.tiefe});
+                                                                                laenge: this.Laenge,
+                                                                                breite: this.Breite,
+                                                                                tiefe: this.Tiefe});
     console.log(res.data);
     this.created();
   }
