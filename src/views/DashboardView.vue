@@ -108,18 +108,6 @@
       }
     }
 
-    // async mounted () {
-    //   this.loaded = false
-
-    //   try {
-    //     const { userlist } = await fetch('/api/userlist')
-    //     this.chartdata = userlist
-
-    //     this.loaded = true
-    //   } catch (e) {
-    //     console.error(e)
-    //   }
-    // }
   }
   const last = [7, 12, 15, 20, 24, 29, 39, 30, 22, 10, 8, 6]
   const temp = [2, 4, 8, 13, 18, 21, 23, 23, 19, 13, 7, 4]

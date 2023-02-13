@@ -9,11 +9,11 @@
       <div class="row mt-4 mb-4">
         <div class="col">
         <label for="bezeichnung" class="form-label">Startdatum</label>
-        <input type="date" class="form-control" id="startdatum" placeholder="Startdatum" v-model="Startdatum" v-on:change="getFullPrice">
+        <input type="date" class="form-control" id="startdatum" disabled placeholder="Startdatum" v-model="Startdatum" v-on:change="getFullPrice">
         </div>
         <div class="col">
         <label for="bezeichnung" class="form-label">Enddatum</label>
-        <input type="date" class="form-control" id="enddatum" placeholder="Enddatum" v-model="Enddatum" v-on:change="getFullPrice">
+        <input type="date" class="form-control" id="enddatum" disabled placeholder="Enddatum" v-model="Enddatum" v-on:change="getFullPrice">
         </div>
       </div>
       <div class="mb-3">
@@ -27,6 +27,22 @@
         </select>
         <span class="input-group-text" id="basic-addon2" href="#" v-on:click.prevent="toggleComponent()">+</span>
       </div>
+      </div>
+
+      <div class="row mt-4 mb-4">
+        <label for="nebenkosten" class="form-label">Nebenkosten</label>
+        <div class="form-check col">
+          <input class="form-check-input nkt" type="checkbox" value="" id="strom">
+          <label class="form-check-label" for="strom">
+            Strom
+          </label>
+        </div>
+        <div class="form-check col">
+          <input class="form-check-input nkt" type="checkbox" value="" id="wasser">
+          <label class="form-check-label" for="wasser">
+            Wasser
+          </label>
+        </div>
       </div>
       
       <div class="mb-3">
@@ -172,5 +188,8 @@ async created(){
   span:hover{
     cursor: pointer;
   }
+.nkt{
+  margin: 5px;
+}
 </style>
 
