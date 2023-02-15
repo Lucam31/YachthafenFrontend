@@ -9,7 +9,7 @@
       <div class="accordion-item" v-for="Buchung in zukuenftigeBuchungen" :key="Buchung.m_BuchungsId">
         <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Buchung.m_BuchungsId">
-            {{Buchung.m_BuchungsId}}
+            Buchung vom {{converter(Buchung.m_Startdatum)}} bis zum {{ converter(Buchung.m_Enddatum) }}
           </button>
         </h2>
         <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
@@ -17,7 +17,7 @@
 
             
             <div class="mb-3 title">
-              <p class="h3 mb-5">Buchung {{ Buchung.m_BuchungsId }}</p>
+              <p class="h3 mb-5">Übersicht</p>
             </div>
             <div class="row mt-4 mb-4">
               <div class="mb-3 col">
@@ -32,11 +32,36 @@
             <div class="row mt-4 mb-4">
               <div class="mb-3 col">
                 <label for="ende" class="form-label">Startdatum</label>
-                <input type="text" class="form-control" id="start" disabled :value="Buchung.m_Startdatum">
+                <input type="text" class="form-control" id="start" disabled :value="converter(Buchung.m_Startdatum)">
               </div>      
               <div class="mb-3 col">
                 <label for="start" class="form-label">Enddatum</label>
-                <input type="text" class="form-control" id="ende" disabled :value="Buchung.m_Enddatum">
+                <input type="text" class="form-control" id="ende" disabled :value="converter(Buchung.m_Enddatum)">
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <label for="nebenkosten" class="form-label">Nebenkosten</label>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <label class="form-check-label" for="strom">
+                  Strom
+                </label>
+              </div>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <label class="form-check-label" for="wasser">
+                  Wasser
+                </label>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Tagespreis</label>
+                <input type="text" class="form-control" id="tagespreis" disabled :value="Buchung.m_Tagespreis">
+              </div>
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Gesamtpreis</label>
+                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
               </div>
             </div>
             <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBuchungStornieren({Buchung})">Stornieren</button>
@@ -57,14 +82,14 @@
       <div class="accordion-item" v-for="Buchung in alteBuchungen" :key="Buchung.m_BuchungsId">
         <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#panelsStayOpen-collapse'+Buchung.m_BuchungsId" aria-expanded="false" :aria-controls="'panelsStayOpen-collapse'+Buchung.m_BuchungsId">
-            {{Buchung.m_BuchungsId}}
+            Buchung vom {{converter(Buchung.m_Startdatum)}} bis zum {{ converter(Buchung.m_Enddatum) }}
           </button>
         </h2>
         <div :id="'panelsStayOpen-collapse'+Buchung.m_BuchungsId" class="accordion-collapse collapse" :aria-labelledby="'panelsStayOpen-heading'+Buchung.m_BuchungsId">
           <div class="accordion-body">
             
             <div class="mb-3 title">
-              <p class="h3 mb-5">Buchung {{ Buchung.m_BuchungsId }}</p>
+              <p class="h3 mb-5">Übersicht</p>
             </div>
             <div class="row mt-4 mb-4">
               <div class="mb-3 col">
@@ -79,11 +104,37 @@
             <div class="row mt-4 mb-4">
               <div class="mb-3 col">
                 <label for="ende" class="form-label">Startdatum</label>
-                <input type="text" class="form-control" id="start" disabled :value="Buchung.m_Startdatum">
+                <input type="text" class="form-control" id="start" disabled :value="converter(Buchung.m_Startdatum)">
               </div>      
               <div class="mb-3 col">
                 <label for="start" class="form-label">Enddatum</label>
-                <input type="text" class="form-control" id="ende" disabled :value="Buchung.m_Enddatum">
+                <input type="text" class="form-control" id="ende" disabled :value="converter(Buchung.m_Enddatum)">
+              </div>
+            </div>
+            
+            <div class="row mt-4 mb-4">
+              <label for="nebenkosten" class="form-label">Nebenkosten</label>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <label class="form-check-label" for="strom">
+                  Strom
+                </label>
+              </div>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <label class="form-check-label" for="wasser">
+                  Wasser
+                </label>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Tagespreis</label>
+                <input type="text" class="form-control" id="tagespreis" disabled :value="Buchung.m_Tagespreis">
+              </div>
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Gesamtpreis</label>
+                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
               </div>
             </div>
 
@@ -149,6 +200,7 @@
   // @ is an alias to /src
   import axios from 'axios'
   import APIURLService from '../services/API.service';
+  import TimeConverterService from '@/services/TimeConverter.service';
 
   export default {
     name: 'BuchungenView',
@@ -187,6 +239,9 @@
         this.zukuenftigeBuchungen = await (await axios.post(APIURLService.getAPIUrl()+'/api/Buchung/StorniereBuchung?BuchungsId=' + Buchung.Buchung.m_BuchungsId));
 
         this.zukuenftigeBuchungen = await (await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetZukuenftigeBuchungenFromKunde?kundenId=' + this.$store.getters.getKundenId)).data;
+      },
+      converter(date) {
+        return TimeConverterService.convertDate(new Date(date));
       }
     
   }
@@ -194,7 +249,7 @@
   
   </script>
   
-  <style>
+  <style scoped>
   button{
     margin: 0;
   }
@@ -220,5 +275,8 @@
   }
   .accordion-body{
     align-items: center;
+  }
+  .nkt{
+    margin: 5px;
   }
   </style>
