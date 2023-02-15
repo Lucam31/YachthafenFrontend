@@ -71,10 +71,12 @@
           <div class="card-header">
             <div class="card-title">Auslastung<br />heute</div>
           </div>
-          <div class="card-percent">50%</div>
-          <p class="recent">Insgesamt: 10 | Belegt: 5</p>
+          <div class="card-body">
+            <Chart type="bar" :data="chartData" :options="options"  />
+          </div>
         </div>
       </div>
+
       <div class="card monkey">
         <div class="img-section">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up"
@@ -88,12 +90,9 @@
             <div class="card-title">Auslastung<br />heute</div>
           </div>
           <div class="card-body">
-            <Doughnut id="AuslastungsD" :options="chartOptions" :data="chartData" />
+            <Doughnut id="AuslastungsD" :options="options" :data="DoughnutData" />
           </div>
         </div>
-      </div>
-
-      <div class="dashboard-bar">
       </div>
     </div>
   </div>
@@ -104,10 +103,10 @@
 import axios from "axios";
 import APIURLService from "../services/API.service";
 
-import { Doughnut } from 'vue-chartjs'
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
+import { Doughnut, Chart } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
 
 const options = {
   responsive: true,
@@ -116,7 +115,7 @@ const options = {
 
 export default {
   name: "DashboardView",
-  components: { Doughnut },
+  components: { Doughnut, Chart },
 
   data: () => ({
     loaded: true, //false wenn Daten erst geladen werden (von API),
@@ -125,26 +124,44 @@ export default {
     AuslastungInsgesamt: 0,
     AuslastungBelegt: 0,
     Jahresumsatz: 0,
-    a: 5,
-    b: 8,
+    LiegeplatzRanking: "",
   }),
   computed: {
-       chartData() {
+    DoughnutData() {
       return {
-      labels: ['Freie Plaetze','Belegte Plaetze'],
-      datasets: [
-        {
-          backgroundColor: ['#41B883','#DD1B16'],
-          data: [(this.AuslastungInsgesamt - this.AuslastungBelegt),this.AuslastungBelegt] //hier muss gerechnet werden da
-        }
-      ]
-    } },
+        labels: ['Freie Plaetze', 'Belegte Plaetze'],
+        datasets: [
+          {
+            backgroundColor: ['#41B883', '#DD1B16'],
+            data: [(this.AuslastungInsgesamt - this.AuslastungBelegt), this.AuslastungBelegt] //hier muss gerechnet werden da
+          }
+        ]
+      }
+    },
+    chartData() {
+      return {
+        labels: [
+          'Edel',
+          'Marcel Platz',
+          'Platz 1',
+          'Supper Platz',
+          'abc'
+        ],
+        datasets: [
+          {
+            label: 'Buchungen',
+            backgroundColor: '#f87979',
+            data: [this.LiegeplatzRanking.Edel, 3, 8, 5, this.LiegeplatzRanking.abc] //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
+          }
+        ]
+      }
+    }
 
   },
   async created() {
     var res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetAktuelleAuslastung");
 
-    this.AuslastungBelegt = res.data.akt;    
+    this.AuslastungBelegt = res.data.akt;
     this.AuslastungInsgesamt = res.data.max;
 
     if (res.data.akt == 0) {
@@ -156,6 +173,9 @@ export default {
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetJahresUmsatz");
     this.Jahresumsatz = res.data;
+
+    res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetLiegeplatzRanking");
+    this.LiegeplatzRanking = res.data;
   }
 };
 </script>
