@@ -113,23 +113,35 @@
           }
         ]  //chartData null wenn Daten geladen werden
       },
-      auslastungHeuteData: {
-        labels: ['Gebucht', 'Frei'],
-        datasets: [
-          {
-            data: [20, 20],
-            backgroundColor: ['rgb(255, 0, 0)', 'rgb(0,128,0)']
-          }
-        ]
-      },
+      auslastungHeuteData: null,
       AuslastungheuteProzent: 0,
       AuslastungInsgesamt: 0,
       AuslastungBelegt: 0,
-      Jahresumsatz: 0
+      Jahresumsatz: 0,
+      a: 0,
+      b: 0
     }),
+    computed: {
+     // auslastungHeuteData() { return /* mutable chart data */ }
+    },
+    async mounted(){
+      var res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetAktuelleAuslastung');
+
+      this.auslastungHeuteData = [res.data.akt,res.data.max];
+    },
     async created(){
       var res = await axios.get(APIURLService.getAPIUrl()+'/api/Dashboard/GetAktuelleAuslastung');
       this.AuslastungBelegt = res.data.akt;
+
+     // this.auslastungHeuteData = [res.data.akt,res.data.max];
+
+
+      
+      this.auslastungHeuteData.datasets.forEach((dataset) => {
+          dataset.data.push([res.data.akt,res.data.max] );
+      });
+      this.auslastungHeuteData.update();
+
       this.AuslastungInsgesamt = res.data.max;
       if(res.data.akt == 0){
         this.AuslastungheuteProzent = 0;    
