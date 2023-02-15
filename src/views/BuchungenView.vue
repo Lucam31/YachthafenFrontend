@@ -42,13 +42,13 @@
             <div class="row mt-4 mb-4">
               <label for="nebenkosten" class="form-label">Nebenkosten</label>
               <div class="form-check col">
-                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <input class="form-check-input nkt" type="checkbox" :checked="Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Strom'" id="strom" disabled>
                 <label class="form-check-label" for="strom">
                   Strom
                 </label>
               </div>
               <div class="form-check col">
-                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <input class="form-check-input nkt" type="checkbox" :checked="Buchung.m_Nebenkosten[1] != null && Buchung.m_Nebenkosten[1].m_Name == 'Wasser' || Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Wasser'" id="wasser" disabled>
                 <label class="form-check-label" for="wasser">
                   Wasser
                 </label>
@@ -61,7 +61,7 @@
               </div>
               <div class="mb-3 col">
                 <label for="tagespreis" class="form-label">Gesamtpreis</label>
-                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
+                <input type="text" class="form-control" id="gesamtpreis" disabled :value="getFullPrice(Buchung)">
               </div>
             </div>
             <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBuchungStornieren({Buchung})">Stornieren</button>
@@ -115,13 +115,13 @@
             <div class="row mt-4 mb-4">
               <label for="nebenkosten" class="form-label">Nebenkosten</label>
               <div class="form-check col">
-                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <input class="form-check-input nkt" type="checkbox" :checked="Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Strom'" id="strom" disabled>
                 <label class="form-check-label" for="strom">
                   Strom
                 </label>
               </div>
               <div class="form-check col">
-                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <input class="form-check-input nkt" type="checkbox" :checked="Buchung.m_Nebenkosten[1] != null && Buchung.m_Nebenkosten[1].m_Name == 'Wasser' || Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Wasser'" id="wasser" disabled>
                 <label class="form-check-label" for="wasser">
                   Wasser
                 </label>
@@ -134,7 +134,7 @@
               </div>
               <div class="mb-3 col">
                 <label for="tagespreis" class="form-label">Gesamtpreis</label>
-                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
+                <input type="text" class="form-control" id="gesamtpreis" disabled :value="getFullPrice(Buchung)">
               </div>
             </div>
 
@@ -223,7 +223,8 @@
     return{
         zukuenftigeBuchungen: null,
         alteBuchungen: null,
-        Boote: null
+        Boote: null,
+        test: true
     };
     },
     methods:{ 
@@ -242,8 +243,33 @@
       },
       converter(date) {
         return TimeConverterService.convertDate(new Date(date));
-      }
-    
+      },
+
+      getFullPrice(Buchung) {
+        var day1 = new Date(Buchung.m_Startdatum);
+        var day2 = new Date(Buchung.m_Enddatum);
+        var dif = Math.abs(day2 - day1);
+        var days = dif/(1000*3600*24)
+
+        if(days == 0)
+          days = 1;
+        
+        var Gesamtpreis = Buchung.m_Tagespreis * days;
+
+        if(Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Strom'){
+          Gesamtpreis = Gesamtpreis + Buchung.m_Nebenkosten[0].m_Preis;
+        }
+      
+        if(Buchung.m_Nebenkosten[0] != null && Buchung.m_Nebenkosten[0].m_Name == 'Wasser'){
+          Gesamtpreis = Gesamtpreis + Buchung.m_Nebenkosten[0].m_Preis;
+        }
+
+        if(Buchung.m_Nebenkosten[1] != null && Buchung.m_Nebenkosten[1].m_Name == 'Wasser'){
+          Gesamtpreis = Gesamtpreis + Buchung.m_Nebenkosten[1].m_Preis;
+        }
+
+        return Gesamtpreis;
+      }   
   }
 }
   
