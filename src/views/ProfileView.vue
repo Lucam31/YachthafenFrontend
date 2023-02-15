@@ -89,8 +89,7 @@ export default {
                 kundeId: this.$store.getters.getKundenId,
                 name: this.Name,
                 vorname: this.Vorname,
-                email: this.Email,
-                Passwort: null
+                email: this.Email
             });
             this.updateStore();
 

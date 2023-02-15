@@ -19,6 +19,8 @@
           <li>20 m maximale Breite</li>
           <li>Brauch- und Trinkwasserzapfstelle</li>
           <li>230 V Stromanschlüsse</li>
+          <li>Check-In ab 10 Uhr</li>
+          <li>Check-Out bis 10 Uhr (lezter Tag wird nicht berechnet)</li>
         </ul>
       </div>
     </div>

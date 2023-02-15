@@ -1,5 +1,5 @@
 class DateConverterService {
-    convertDate(date) {
+    convertDate(inputDate) {
         let date, month, year;
 
         date = inputDate.getDate();
@@ -14,7 +14,7 @@ class DateConverterService {
                 .toString()
                 .padStart(2, '0');
 
-        return `${date}/${month}/${year}`;
+        return `${date}.${month}.${year}`;
     }
 }
 
