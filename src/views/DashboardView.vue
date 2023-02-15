@@ -36,7 +36,7 @@
           <div class="card-percent">100%</div>
           <p class="recent">Insgesamt: 100 | Erreicht: 100</p>
         </div>
-      </div>
+        </div>
       <div class="card work">
           <div class="img-section">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
@@ -64,6 +64,21 @@
           <p class="recent">Insgesamt: 10 | Belegt: 5</p>
         </div>
       </div>
+      <div class="card monkey" @click="updateChartData('last')">
+        <div class="img-section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+            </svg>
+        </div>
+        <div class="card-desc">
+          <div class="card-header">
+            <div class="card-title">Auslastung<br>heute</div>
+          </div>
+          <div class="card-body">
+            <Doughnut v-if="loaded" id="auslastungHeutePie" :data="auslastungHeuteData"/>
+          </div>
+        </div>
+      </div>
 
       <div class="dashboard-bar">
         <Bar v-if="loaded" :data="chartData" :style="barStyle" id="barChart"/>
@@ -75,16 +90,16 @@
 </template>
   
   <script>
-  import { Bar } from 'vue-chartjs'
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+  import { Bar, Doughnut } from 'vue-chartjs'
+  import { Chart as ChartJS, ArcElement, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+  ChartJS.register(ArcElement, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
   import axios from 'axios'
   import APIURLService from '../services/API.service';
-  
+
   export default {
     name: 'DashboardView',
-    components: { Bar },
+    components: { Bar, Doughnut },
     
     data: () => ({
       loaded: true, //false wenn Daten erst geladen werden (von API)
@@ -97,6 +112,15 @@
             data: [7, 12, 15, 20, 24, 29, 39, 30, 22, 10, 8, 6]
           }
         ]  //chartData null wenn Daten geladen werden
+      },
+      auslastungHeuteData: {
+        labels: ['Gebucht', 'Frei'],
+        datasets: [
+          {
+            data: [20, 20],
+            backgroundColor: ['rgb(255, 0, 0)', 'rgb(0,128,0)']
+          }
+        ]
       },
       AuslastungheuteProzent: 0,
       AuslastungInsgesamt: 0,
