@@ -145,7 +145,7 @@
             this.loadLiegeplaetze();
         },
         async loadLiegeplaetze(){
-          var res = await axios.get(APIURLService.getAPIUrl()+'/api/LiegeplatzVerwaltung/GetAllLiegplaetze');
+          var res = await axios.get(APIURLService.getAPIUrl()+'/api/LiegeplatzVerwaltung/GetAllLiegeplaetze');
           this.Liegeplaetze = res.data;
         },
         async onLiegeplatzLoeschen(Liegeplatz){
