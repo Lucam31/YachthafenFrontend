@@ -39,6 +39,31 @@
                 <input type="text" class="form-control" id="ende" disabled :value="converter(Buchung.m_Enddatum)">
               </div>
             </div>
+            <div class="row mt-4 mb-4">
+              <label for="nebenkosten" class="form-label">Nebenkosten</label>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <label class="form-check-label" for="strom">
+                  Strom
+                </label>
+              </div>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <label class="form-check-label" for="wasser">
+                  Wasser
+                </label>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Tagespreis</label>
+                <input type="text" class="form-control" id="tagespreis" disabled :value="Buchung.m_Tagespreis">
+              </div>
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Gesamtpreis</label>
+                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
+              </div>
+            </div>
             <button type="submit" class="input-group-text cancelButton" v-on:click.prevent="onBuchungStornieren({Buchung})">Stornieren</button>
 
 
@@ -84,6 +109,32 @@
               <div class="mb-3 col">
                 <label for="start" class="form-label">Enddatum</label>
                 <input type="text" class="form-control" id="ende" disabled :value="converter(Buchung.m_Enddatum)">
+              </div>
+            </div>
+            
+            <div class="row mt-4 mb-4">
+              <label for="nebenkosten" class="form-label">Nebenkosten</label>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="strom" disabled>
+                <label class="form-check-label" for="strom">
+                  Strom
+                </label>
+              </div>
+              <div class="form-check col">
+                <input class="form-check-input nkt" type="checkbox" value="" id="wasser" disabled>
+                <label class="form-check-label" for="wasser">
+                  Wasser
+                </label>
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Tagespreis</label>
+                <input type="text" class="form-control" id="tagespreis" disabled :value="Buchung.m_Tagespreis">
+              </div>
+              <div class="mb-3 col">
+                <label for="tagespreis" class="form-label">Gesamtpreis</label>
+                <input type="text" class="form-control" id="gesamtpreis" disabled v-model="Gesamtpreis">
               </div>
             </div>
 
@@ -198,7 +249,7 @@
   
   </script>
   
-  <style>
+  <style scoped>
   button{
     margin: 0;
   }
@@ -224,5 +275,8 @@
   }
   .accordion-body{
     align-items: center;
+  }
+  .nkt{
+    margin: 5px;
   }
   </style>
