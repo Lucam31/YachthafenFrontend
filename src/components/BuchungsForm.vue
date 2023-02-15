@@ -9,11 +9,11 @@
       <div class="row mt-4 mb-4">
         <div class="col">
         <label for="bezeichnung" class="form-label">Startdatum</label>
-        <input type="date" class="form-control" id="startdatum" disabled placeholder="Startdatum" v-model="Startdatum" v-on:change="getFullPrice">
+        <input type="date" class="form-control" id="startdatum" disabled placeholder="Startdatum" v-model="Startdatum">
         </div>
         <div class="col">
         <label for="bezeichnung" class="form-label">Enddatum</label>
-        <input type="date" class="form-control" id="enddatum" disabled placeholder="Enddatum" v-model="Enddatum" v-on:change="getFullPrice">
+        <input type="date" class="form-control" id="enddatum" disabled placeholder="Enddatum" v-model="Enddatum">
         </div>
       </div>
       <div class="mb-3">
@@ -32,15 +32,15 @@
       <div class="row mt-4 mb-4">
         <label for="nebenkosten" class="form-label">Nebenkosten</label>
         <div class="form-check col">
-          <input class="form-check-input nkt" type="checkbox" value="" id="strom">
+          <input class="form-check-input nkt" type="checkbox" value="" v-model="StromGebucht" v-on:change="getFullPrice" id="strom">
           <label class="form-check-label" for="strom">
-            Strom
+            Strom (Preis: {{ StromPreis }}€)
           </label>
         </div>
         <div class="form-check col">
-          <input class="form-check-input nkt" type="checkbox" value="" id="wasser">
+          <input class="form-check-input nkt" type="checkbox" value="" v-model="WasserGebucht" v-on:change="getFullPrice" id="wasser">
           <label class="form-check-label" for="wasser">
-            Wasser
+            Wasser (Preis: {{ WasserPreis }}€)
           </label>
         </div>
       </div>
@@ -105,7 +105,11 @@ export default {
     registrierungsid: null,
     Startdatum: null,
     Enddatum: null,
-    Gesamtpreis: null
+    Gesamtpreis: null,
+    WasserGebucht: false,
+    StromGebucht: false,
+    WasserPreis: null,
+    StromPreis: null
   };
 },
 methods:{
@@ -113,27 +117,37 @@ methods:{
     this.visible = !this.visible;
   },
   getFullPrice() {
+    console.log("test");
     var day1 = new Date(this.Startdatum);
     var day2 = new Date(this.Enddatum);
     var dif = Math.abs(day2 - day1);
     var days = dif/(1000*3600*24)
-    console.log(days)
+
     this.Gesamtpreis = this.Tagespreis * days;
+
+    if(this.WasserGebucht){
+      this.Gesamtpreis = this.Gesamtpreis + this.WasserPreis;
+    }
+
+    if(this.StromGebucht){
+      this.Gesamtpreis = this.Gesamtpreis + this.StromPreis;
+    }
+    
   },
   async onBuchen(){
-    console.log(this.selected);
+
     const kunden_id = this.$store.getters.getKundenId;
     const startdatum = this.$store.getters.getstartDatum;
     const enddatum = this.$store.getters.getEnddatum;
     const liegeplatzid = this.$store.getters.getLiegeplatzId;
-    console.log(kunden_id);
+
     var res = await axios.post(APIURLService.getAPIUrl()+'/api/Buchung/CreateBuchung',{ kundenid: kunden_id,
                                                                                     liegeplatzid: liegeplatzid,
                                                                                     registrierungsid: this.selected,
                                                                                     start: startdatum,
                                                                                     end: enddatum,
-                                                                                    wasser: true,
-                                                                                    strom: true});
+                                                                                    wasser: this.WasserGebucht,
+                                                                                    strom: this.StromGebucht});
     console.log(res.data);
     if(res.data != -1){
       //buchung Erfolg
@@ -144,15 +158,14 @@ methods:{
 
   },
   async onBootAnlegen(){
-    var res = await axios.post(APIURLService.getAPIUrl()+'/api/Kunden/CreateBoot',{ name: this.Boot_name,
+    await axios.post(APIURLService.getAPIUrl()+'/api/Kunden/CreateBoot',{ name: this.Boot_name,
                                                                                 registrierungsid: this.registrierungsid,
                                                                                 laenge: this.Laenge,
                                                                                 breite: this.Breite,
                                                                                 tiefe: this.Tiefe,
                                                                                 benutzerId: this.$store.getters.getKundenId
                                                                                 });
-    console.log(res.data);
-    this.created();
+    this.toggleComponent();
   }
 },
 setup(){
@@ -169,6 +182,12 @@ async created(){
   const kunden_id = this.$store.getters.getKundenId;
   var res = await axios.get(APIURLService.getAPIUrl()+'/api/Kunden/GetBooteFromKunde?kundenId='+ kunden_id);
   this.BooteDesUsers = res.data;
+
+  res = await axios.get(APIURLService.getAPIUrl()+'/api/Buchung/GetNebenkostenDetails');
+  this.StromPreis = res.data[0].m_Preis;
+  this.WasserPreis = res.data[1].m_Preis;
+
+
 
   this.getFullPrice()
   
