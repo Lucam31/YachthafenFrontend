@@ -9,91 +9,51 @@
       <p>Test</p>
     </div>
     <div class="panels list-group-item">
-      <div class="card auslastung" @click="updateChartData('last')">
-        <div class="img-section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
-          </svg>
-        </div>
-        <div class="card-desc">
-          <div class="card-header">
-            <div class="card-title">Auslastung<br />heute</div>
+
+      
+      <div class="card">
+        <img src="../../img/card1.jpg" alt="Bild">
+        <div class="card-content">
+          <h2>
+            Auslastung heute
+          </h2>
+          <div class="before">
+            <div class="mainVal">
+              <h1>{{ AuslastungheuteProzent }} %</h1>
+            </div>
+            <div class="desc">
+              <span>Insgesamt: {{ AuslastungInsgesamt }} | Belegt: {{ AuslastungBelegt }}</span>
+            </div>
           </div>
-          <div class="card-percent">{{ AuslastungheuteProzent }} %</div>
-          <p class="recent">
-            Insgesamt: {{ AuslastungInsgesamt }} | Belegt:
-            {{ AuslastungBelegt }}
-          </p>
+          <div class="after">
+            <Doughnut id="AuslastungsD" :options="cardOptions" :data="DoughnutData" />
+          </div>
         </div>
       </div>
-      <div class="card work" @click="updateChartData('temps')">
-        <div class="img-section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="black" class="bi bi-percent"
-            viewBox="0 0 16 16">
-            <path
-              d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-          </svg>
-        </div>
-        <div class="card-desc">
-          <div class="card-header">
-            <div class="card-title">Punktzahl für dieses Projekt</div>
+      
+
+      <div class="card">
+        <img src="../../img/card1.jpg" alt="Bild">
+        <div class="card-content">
+          <h2>
+            Jahresumsatz
+          </h2>
+          <div class="mainVal">
+            <h1>{{ Jahresumsatz }} €</h1>
           </div>
-          <div class="card-percent">100%</div>
-          <p class="recent">Insgesamt: 100 | Erreicht: 100</p>
-        </div>
-      </div>
-      <div class="card work">
-        <div class="img-section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
-          </svg>
-        </div>
-        <div class="card-desc">
-          <div class="card-header">
-            <div class="card-title">Jahresumsatz bis lang</div>
-          </div>
-          <div class="card-percent">{{ Jahresumsatz }} €</div>
-        </div>
-      </div>
-      <div class="card work">
-        <div class="img-section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
-          </svg>
-        </div>
-        <div class="card-desc">
-          <div class="card-header">
-            <div class="card-title">Auslastung<br />heute</div>
-          </div>
-          <div class="card-body">
-            <Chart type="bar" :data="chartData" :options="options"  />
+          <div class="desc">
+            <span>Insgesamt: {{ AuslastungInsgesamt }} | Belegt: {{ AuslastungBelegt }}</span>
           </div>
         </div>
       </div>
 
-      <div class="card monkey">
-        <div class="img-section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-graph-up"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
-          </svg>
-        </div>
-        <div class="card-desc">
-          <div class="card-header">
-            <div class="card-title">Auslastung<br />heute</div>
-          </div>
-          <div class="card-body">
-            <Doughnut id="AuslastungsD" :options="options" :data="DoughnutData" />
-          </div>
-        </div>
+
+
+
+      <div class="barChart">
+        <Chart type="bar" :data="chartData" :options="options"  />
       </div>
+
     </div>
   </div>
 </template>
@@ -103,14 +63,28 @@
 import axios from "axios";
 import APIURLService from "../services/API.service";
 
+//import { Doughnut } from 'vue-chartjs'
 import { Doughnut, Chart } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
 
+
 const options = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
+  
+};
+const cardOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: {
+        color: 'white'
+      }
+    }
+  }
 };
 
 export default {
@@ -120,6 +94,7 @@ export default {
   data: () => ({
     loaded: true, //false wenn Daten erst geladen werden (von API),
     options,
+    cardOptions,
     AuslastungheuteProzent: 0,
     AuslastungInsgesamt: 0,
     AuslastungBelegt: 0,
@@ -132,7 +107,7 @@ export default {
         labels: ['Freie Plaetze', 'Belegte Plaetze'],
         datasets: [
           {
-            backgroundColor: ['#41B883', '#DD1B16'],
+            backgroundColor: ['#5f9429', '#DD1B16'],
             data: [(this.AuslastungInsgesamt - this.AuslastungBelegt), this.AuslastungBelegt] //hier muss gerechnet werden da
           }
         ]
@@ -150,7 +125,7 @@ export default {
         datasets: [
           {
             label: 'Buchungen',
-            backgroundColor: '#f87979',
+            backgroundColor: '#5f9429',
             data: [this.LiegeplatzRanking.Edel, 3, 8, 5, this.LiegeplatzRanking.abc] //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
           }
         ]
@@ -200,90 +175,103 @@ export default {
   margin-top: 1em;
 }
 
-svg {
-  margin: 5px;
+
+
+.card{
+  width: 300px;
+  height: 350px;
+  background-color: rgb(7, 7, 7);
+  margin: 1em;
+  color: white;
+}
+h1 {
+  transition: ease-in-out .2s;
 }
 
-.card {
-  font-family: "Arial";
-  color: #fff;
-  box-sizing: border-box;
-  display: grid;
-  cursor: pointer;
-  grid-template-rows: 50px 1fr;
-  --primary-clr: #4b9fd8;
-  width: 200px;
-  height: 230px;
-  margin: 2em;
-  border-radius: 10px;
-  border: none;
-  justify-self: center;
-}
-
-.card:hover .img-section {
-  transform: translateY(1em);
-}
-
-.card-desc {
-  border-radius: 10px;
-  padding: 13px;
-  position: relative;
-  top: -10px;
-  display: grid;
-  gap: 10px;
-  background: var(--primary-clr);
-}
-
-.card-percent {
-  font-size: 1.7em;
-  font-weight: 500;
-}
-
-.img-section {
-  transition: 0.3s;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background: hsl(212, 67%, 48%);
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
+.card:hover .card-content{
   width: 100%;
+  height: 100%;
+  border: 0px solid white;
+  padding: 2em;
+}
+.card:hover img{
+  opacity: .3;
+}
+.card:hover h1 {
+  font-size: 40pt;
+}
+.card:hover .desc {
+  margin-bottom: 10px;
+  font-size: large;
 }
 
-.card-title {
-  flex: 1;
-  font-size: 0.9em;
-  font-weight: 500;
+.card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border: 5px solid white;
+  padding: 5px;
+  transition: ease-in-out .2s;
 }
-
-.card-menu {
-  display: flex;
-  gap: 4px;
-  margin-inline: auto;
-}
-
-.card svg {
-  float: right;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.card .dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--dot-clr);
-}
-
-.card .recent {
-  line-height: 0;
-  font-size: 0.8em;
-  word-break: break-all;
-}
-
-.dashboard-bar {
+.mainVal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
+  text-align: center;
 }
+
+.desc {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: ease-in-out .2s;
+}
+
+img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: .8;
+  transition: ease-in-out .2s;
+}
+
+.before {
+  transition: ease-in-out .2s;
+}
+.after {
+  opacity: 0;
+  height: 70%;
+  width: 100%;
+  transition: ease-in-out .3s;
+}
+
+.card:hover .before {
+  display: none;
+}
+.card:hover .after {
+  opacity: 1;
+}
+
+
+
+
+.barChart {
+  width: 70%;
+  height: 50%;
+}
+
+
 </style> 
