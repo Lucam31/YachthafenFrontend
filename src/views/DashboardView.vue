@@ -10,7 +10,7 @@
     </div>
     <div class="panels list-group-item">
 
-      
+
       <div class="card">
         <img src="../../img/card1.jpg" alt="Bild">
         <div class="card-content">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      
+
 
       <div class="card">
         <img src="../../img/card1.jpg" alt="Bild">
@@ -42,7 +42,6 @@
             <h1>{{ Jahresumsatz }} €</h1>
           </div>
           <div class="desc">
-            <span>Insgesamt: {{ AuslastungInsgesamt }} | Belegt: {{ AuslastungBelegt }}</span>
           </div>
         </div>
       </div>
@@ -51,29 +50,42 @@
 
 
       <div class="barChart">
-        <Chart type="bar" :data="chartData" :options="options"  />
+        <h3>
+          Buchungen pro Platz
+        </h3>
+        <Chart type="bar" :data="chartData" :options="options" />
+      </div>
+
+      <div class="barChart">
+        <h3>
+          Umsatz pro Monat
+        </h3>
+        <Line :data="MonatsData" :options="options" />
       </div>
 
     </div>
-  </div>
+</div>
 </template>
   
 <script>
+
+
+
 
 import axios from "axios";
 import APIURLService from "../services/API.service";
 
 //import { Doughnut } from 'vue-chartjs'
-import { Doughnut, Chart } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
+import { Doughnut, Chart, Line } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement, PointElement, LineElement } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement, PointElement, LineElement)
 
 
 const options = {
   responsive: true,
   maintainAspectRatio: false,
-  
+
 };
 const cardOptions = {
   responsive: true,
@@ -89,7 +101,7 @@ const cardOptions = {
 
 export default {
   name: "DashboardView",
-  components: { Doughnut, Chart },
+  components: { Doughnut, Chart, Line },
 
   data: () => ({
     loaded: true, //false wenn Daten erst geladen werden (von API),
@@ -99,7 +111,10 @@ export default {
     AuslastungInsgesamt: 0,
     AuslastungBelegt: 0,
     Jahresumsatz: 0,
-    LiegeplatzRanking: "",
+    Plaetze: new Array(),
+    PlaetzBuchungen: new Array(),
+    Monate: new Array(),
+    MonateBuchungen: new Array()
   }),
   computed: {
     DoughnutData() {
@@ -115,18 +130,24 @@ export default {
     },
     chartData() {
       return {
-        labels: [
-          'Edel',
-          'Marcel Platz',
-          'Platz 1',
-          'Supper Platz',
-          'abc'
-        ],
+        labels: this.Plaetze,
         datasets: [
           {
             label: 'Buchungen',
+            backgroundColor: '#0b5ed7',
+            data: this.PlaetzBuchungen //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
+          }
+        ]
+      }
+    },
+    MonatsData() {
+      return {
+        labels: this.Monate,
+        datasets: [
+          {
+            label: 'Umsatz in €',
             backgroundColor: '#5f9429',
-            data: [this.LiegeplatzRanking.Edel, 3, 8, 5, this.LiegeplatzRanking.abc] //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
+            data: this.MonateBuchungen //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
           }
         ]
       }
@@ -135,22 +156,35 @@ export default {
   },
   async created() {
     var res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetAktuelleAuslastung");
+    this.AuslastungBelegt = res.data[0].value;
+    this.AuslastungInsgesamt = res.data[1].value;
 
-    this.AuslastungBelegt = res.data.akt;
-    this.AuslastungInsgesamt = res.data.max;
-
-    if (res.data.akt == 0) {
+    if (this.AuslastungBelegt == 0) {
       this.AuslastungheuteProzent = 0;
     } else {
-      this.AuslastungheuteProzent = (res.data.akt / res.data.max) * 100;
+      this.AuslastungheuteProzent = (this.AuslastungBelegt / this.AuslastungInsgesamt) * 100;
     }
 
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetJahresUmsatz");
     this.Jahresumsatz = res.data;
-
+    //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetLiegeplatzRanking");
-    this.LiegeplatzRanking = res.data;
+    this.Plaetze = new Array();
+    this.PlaetzBuchungen = new Array();
+    for (let i = 0; i < res.data.length; i++) {
+      this.Plaetze.push(res.data[i].key);
+      this.PlaetzBuchungen.push(res.data[i].value);
+    }
+    //----------------------------------------
+    res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetUmsatzMonat");
+    this.Monate = new Array();
+    this.MonateBuchungen = new Array();
+    for (let i = 0; i < res.data.length; i++) {
+      this.Monate.push(res.data[i].key);
+      this.MonateBuchungen.push(res.data[i].value);
+    }
+
   }
 };
 </script>
@@ -177,29 +211,33 @@ export default {
 
 
 
-.card{
+.card {
   width: 300px;
   height: 350px;
   background-color: rgb(7, 7, 7);
   margin: 1em;
   color: white;
 }
+
 h1 {
   transition: ease-in-out .2s;
 }
 
-.card:hover .card-content{
+.card:hover .card-content {
   width: 100%;
   height: 100%;
   border: 0px solid white;
   padding: 2em;
 }
-.card:hover img{
+
+.card:hover img {
   opacity: .3;
 }
+
 .card:hover h1 {
   font-size: 40pt;
 }
+
 .card:hover .desc {
   margin-bottom: 10px;
   font-size: large;
@@ -216,6 +254,7 @@ h1 {
   padding: 5px;
   transition: ease-in-out .2s;
 }
+
 .mainVal {
   position: absolute;
   top: 50%;
@@ -236,7 +275,7 @@ h1 {
   transition: ease-in-out .2s;
 }
 
-img{
+img {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -251,6 +290,7 @@ img{
 .before {
   transition: ease-in-out .2s;
 }
+
 .after {
   opacity: 0;
   height: 70%;
@@ -261,6 +301,7 @@ img{
 .card:hover .before {
   display: none;
 }
+
 .card:hover .after {
   opacity: 1;
 }
@@ -270,8 +311,7 @@ img{
 
 .barChart {
   width: 70%;
-  height: 50%;
+  height: 25em;
+  margin-bottom: 5em;
 }
-
-
 </style> 

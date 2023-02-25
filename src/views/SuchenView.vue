@@ -63,8 +63,8 @@ export default {
     bootlaenge: 1,
     bootbreite: 1,
     boottiefgang: 1,
-    startdatum: "2023-01-16",
-    enddatum: "2023-01-21"
+    startdatum: "2023-03-16",
+    enddatum: "2023-03-21"
   };
   },
 
