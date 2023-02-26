@@ -1,15 +1,10 @@
 <template>
-  <div class="dashboard list-group list-group-horizontal">
-    <div class="overview list-group-item">
-      <h4>Overview</h4>
-      <p>Test</p>
-      <p>Test</p>
-      <p>Test</p>
-      <p>Test</p>
-      <p>Test</p>
-    </div>
+  <div class="dashboard list-group list-group">
     <div class="panels list-group-item">
 
+      <div class="title">
+        <h1>Dashboard</h1>
+      </div>
 
       <div class="card">
         <img src="../../img/card1.jpg" alt="Bild">
@@ -42,6 +37,21 @@
             <h1>{{ Jahresumsatz }} €</h1>
           </div>
           <div class="desc">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../../img/card1.jpg" alt="Bild">
+        <div class="card-content">
+          <h2>
+            Buchungen
+          </h2>
+          <div class="mainVal">
+            <h1>{{ AuslastungBelegt }} </h1><br> <h4>Mit Nebenkosten</h4> <h3>5</h3>
+          </div>
+          <div class="descHidden">
+            Mit Wasser: 5 | Mit Strom: 5
           </div>
         </div>
       </div>
@@ -167,7 +177,7 @@ export default {
 
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetJahresUmsatz");
-    this.Jahresumsatz = res.data.toLocaleString("de-DE");
+    this.Jahresumsatz = res.data;
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetLiegeplatzRanking");
     this.Plaetze = new Array();
@@ -192,7 +202,7 @@ export default {
   
 <style scoped>
 .panels {
-  width: 75%;
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -209,13 +219,19 @@ export default {
   margin-top: 1em;
 }
 
+.title {
+  width: 100%;
+  text-align: center;
+  margin: 5em 0 2em 0;
+}
+
 
 
 .card {
   width: 300px;
   height: 350px;
   background-color: rgb(7, 7, 7);
-  margin: 1em;
+  margin: 5em 1em 5em 1em;
   color: white;
 }
 
@@ -304,6 +320,23 @@ img {
 
 .card:hover .after {
   opacity: 1;
+}
+
+.descHidden {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: ease-in-out .2s;
+}
+.card:hover .descHidden {
+  opacity: 1;
+  margin-bottom: 10px;
+  font-size: large;
 }
 
 
