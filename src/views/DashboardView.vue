@@ -196,7 +196,7 @@ export default {
     if (this.AuslastungBelegt == 0) {
       this.AuslastungheuteProzent = 0;
     } else {
-      this.AuslastungheuteProzent = (this.AuslastungBelegt / this.AuslastungInsgesamt) * 100;
+      this.AuslastungheuteProzent = ((this.AuslastungBelegt / this.AuslastungInsgesamt) * 100).toFixed(2);
     }
 
     //----------------------------------------
