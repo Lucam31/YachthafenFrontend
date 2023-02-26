@@ -36,6 +36,7 @@
       <input type="button" class="input-group-text" value="Suchen" aria-label="Username" aria-describedby="basic-addon1" @click="onsearch">
     </div>
   </div>
+  <h3 id="startText">Bitte Suchkriterien eingeben</h3>
   <LiegeplatzListe v-if="Angebote" :Angebote="Angebote"></LiegeplatzListe>
 </template>
 
@@ -86,7 +87,8 @@ export default {
                                                                                     startdatum: this.startdatum,
                                                                                     enddatum: this.enddatum});
     this.Angebote = res.data;
-    
+    const startText = document.getElementById("startText");
+    startText.style.visibility = "hidden";
    
     }
   }
