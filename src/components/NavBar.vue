@@ -18,7 +18,7 @@
             <a class="nav-link" href="/verwaltung" v-if="this.$store.getters.getRolle == 2">Liegeplatzverwaltung</a>
           </li>
         </ul>
-        <li class="nav-link">
+        <li class="nav-link" v-if="this.$store.getters.getRolle != null">
           <div class="dropdown">
             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <span>{{ this.$store.getters.getNameVorname }}</span>

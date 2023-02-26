@@ -146,9 +146,9 @@
 
   <div class="mb-3 flex">
     <div class="h2 leftBound">Boote</div>
-    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#boote" aria-expanded="false" aria-controls="collapseExample" v-on:click.prevent="changeSign($event)">-</span>
+    <span class="h2 rightBound" type="button" data-bs-toggle="collapse" data-bs-target="#boote" aria-expanded="false" aria-controls="collapseExample" v-on:click.prevent="changeSign($event)">+</span>
   </div>
-  <div class="itemList collapse show" id="boote">
+  <div class="itemList collapse" id="boote">
     <div class="accordion mb-5" id="accordionPanelsStayOpenExample">
       <div class="accordion-item" v-for="Boot in Boote" v-bind:key="Boot.m_RegistrierungsId" v-bind:value="Boot.m_RegistrierungsId">
         <h2 class="accordion-header" :id="'panelsStayOpen-heading'+Boot.m_RegistrierungsId">

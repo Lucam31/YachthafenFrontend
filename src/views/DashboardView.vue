@@ -167,7 +167,7 @@ export default {
 
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetJahresUmsatz");
-    this.Jahresumsatz = res.data;
+    this.Jahresumsatz = res.data.toLocaleString("de-DE");
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetLiegeplatzRanking");
     this.Plaetze = new Array();

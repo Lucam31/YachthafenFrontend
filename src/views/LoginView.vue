@@ -32,8 +32,8 @@ export default {
   data() {
   return{
     kunden_id: null,
-    email: 'test@test.de',
-    passwort: 'MarcelStinkt'
+    email: null,
+    passwort: null
   };
   },
   methods: {
