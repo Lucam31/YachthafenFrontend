@@ -44,14 +44,23 @@
       <div class="card">
         <img src="../../img/card1.jpg" alt="Bild">
         <div class="card-content">
-          <h2>
+          <div class="before">
+            <h2>
             Buchungen
           </h2>
           <div class="mainVal">
-            <h1>{{ AuslastungBelegt }} </h1><br> <h4>Mit Nebenkosten</h4> <h3>5</h3>
+            <h4>Gesamt</h4>
+            <h3>{{ Buchungengesamt }} </h3>
+            <br> 
+            <h4>Mit Nebenkosten</h4>
+            <h3>{{ BuchungmitNebenkosten }}</h3>
           </div>
-          <div class="descHidden">
-            Mit Wasser: 5 | Mit Strom: 5
+          </div>
+          <div class="after">
+            <h2>
+            Nebenkostenbuchungen
+          </h2>
+            <Doughnut id="NebenkostenD" :options="cardOptions" :data="NebenkostenData" />
           </div>
         </div>
       </div>
@@ -61,14 +70,14 @@
 
       <div class="barChart">
         <h3>
-          Buchungen pro Platz
+          Buchungen pro Platz im Jahr 2023
         </h3>
         <Chart type="bar" :data="chartData" :options="options" />
       </div>
 
       <div class="barChart">
         <h3>
-          Umsatz pro Monat
+          Umsatz pro Monat im Jahr 2023
         </h3>
         <Line :data="MonatsData" :options="options" />
       </div>
@@ -124,7 +133,11 @@ export default {
     Plaetze: new Array(),
     PlaetzBuchungen: new Array(),
     Monate: new Array(),
-    MonateBuchungen: new Array()
+    MonateBuchungen: new Array(),
+    Buchungengesamt: null,
+    BuchungmitNebenkosten: null,
+    BuchungenWasser: null,
+    BuchungenStrom: null,
   }),
   computed: {
     DoughnutData() {
@@ -145,7 +158,7 @@ export default {
           {
             label: 'Buchungen',
             backgroundColor: '#0b5ed7',
-            data: this.PlaetzBuchungen //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
+            data: this.PlaetzBuchungen 
           }
         ]
       }
@@ -157,7 +170,18 @@ export default {
           {
             label: 'Umsatz in €',
             backgroundColor: '#5f9429',
-            data: this.MonateBuchungen //Test Daten weil die Platzname leerstellen haben und dann dumm und es kracht gewaltig
+            data: this.MonateBuchungen 
+          }
+        ]
+      }
+    },
+    NebenkostenData() {
+      return {
+        labels: ['Wasserbuchungen', 'Strombuchungen'],
+        datasets: [
+          {
+            backgroundColor: ['#00BFFF', '#FFFF00'],
+            data: [this.BuchungenWasser, this.BuchungenStrom] 
           }
         ]
       }
@@ -177,7 +201,7 @@ export default {
 
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetJahresUmsatz");
-    this.Jahresumsatz = res.data;
+    this.Jahresumsatz = res.data.toLocaleString("de-DE");
     //----------------------------------------
     res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetLiegeplatzRanking");
     this.Plaetze = new Array();
@@ -194,6 +218,12 @@ export default {
       this.Monate.push(res.data[i].key);
       this.MonateBuchungen.push(res.data[i].value);
     }
+    //----------------------------------------
+    res = await axios.get(APIURLService.getAPIUrl() + "/api/Dashboard/GetNebenkostenDetails");
+    this.Buchungengesamt = res.data[0].value;
+    this.BuchungmitNebenkosten = res.data[1].value;
+    this.BuchungenWasser = res.data[2].value;
+    this.BuchungenStrom = res.data[3].value;
 
   }
 };
