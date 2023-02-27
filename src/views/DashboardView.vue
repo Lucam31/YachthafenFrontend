@@ -72,7 +72,7 @@
         <h3>
           Buchungen pro Platz im Jahr 2023
         </h3>
-        <Chart type="bar" :data="chartData" :options="options" />
+        <Bar :data="chartData" :options="options" />
       </div>
 
       <div class="barChart">
@@ -95,7 +95,7 @@ import axios from "axios";
 import APIURLService from "../services/API.service";
 
 //import { Doughnut } from 'vue-chartjs'
-import { Doughnut, Chart, Line } from 'vue-chartjs'
+import { Doughnut, Bar, Line } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement, PointElement, LineElement } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement, PointElement, LineElement)
@@ -120,7 +120,7 @@ const cardOptions = {
 
 export default {
   name: "DashboardView",
-  components: { Doughnut, Chart, Line },
+  components: { Doughnut, Bar, Line },
 
   data: () => ({
     loaded: true, //false wenn Daten erst geladen werden (von API),
