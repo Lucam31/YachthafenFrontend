@@ -14,7 +14,7 @@
             <input type="text" class="form-control" id="E-Mail" placeholder="E-Mail" v-model="Email">
           </div>
           <div class="mb-4">
-            <input type="text" class="form-control" id="password" placeholder="Password" v-model="Passwort">
+            <input type="password" class="form-control" id="password" placeholder="Password" v-model="Passwort">
           </div>
           <div class="buttons">
             <span type="submit" class="login" v-on:click.prevent="onLogin"> &lt;- Login</span>

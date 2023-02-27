@@ -69,15 +69,15 @@
       </div>
       <div class="mb-3">
         <label for="bezeichnung" class="form-label">Länge</label>
-        <input type="text" class="form-control" id="laenge" v-model="Laenge">
+        <input type="number" class="form-control" id="laenge" v-model="Laenge">
       </div>      
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Breite</label>
-        <input type="text" class="form-control" id="breite" v-model="Breite">
+        <input type="number" class="form-control" id="breite" v-model="Breite">
       </div>
       <div class="mb-3">
         <label for="tagespreis" class="form-label">Tiefe</label>
-        <input type="text" class="form-control" id="tiefe" v-model="Tiefe">
+        <input type="number" class="form-control" id="tiefe" v-model="Tiefe">
       </div>
       <button type="submit" class="input-group-text" v-on:click.prevent="onBootAnlegen">Boot speichern</button>
     </form>

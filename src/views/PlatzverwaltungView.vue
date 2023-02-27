@@ -73,21 +73,21 @@
               <div class="row mt-4 mb-4">
                 <div class="mb-3 col">
                   <label for="laenge" class="form-label">Länge</label>
-                  <input type="text" class="form-control" id="laenge" v-model="Liegeplatz.m_Laenge">
+                  <input type="number" class="form-control" id="laenge" v-model="Liegeplatz.m_Laenge">
                 </div>
                 <div class="mb-3 col">
                   <label for="breite" class="form-label">Breite</label>
-                  <input type="text" class="form-control" id="breite" v-model="Liegeplatz.m_Breite">
+                  <input type="number" class="form-control" id="breite" v-model="Liegeplatz.m_Breite">
                 </div>   
                 </div>
               <div class="row mt-4 mb-4">   
                 <div class="mb-3 col">
                   <label for="tiefgang" class="form-label">Tiefgang</label>
-                  <input type="text" class="form-control" id="tiefgang" v-model="Liegeplatz.m_Tiefgang">
+                  <input type="number" class="form-control" id="tiefgang" v-model="Liegeplatz.m_Tiefgang">
                 </div>
                 <div class="mb-3 col">
                   <label for="tagespreis" class="form-label">Tagespreis</label>
-                  <input type="text" class="form-control" id="tagespreis" v-model="Liegeplatz.m_Tagespreis">
+                  <input type="number" class="form-control" id="tagespreis" v-model="Liegeplatz.m_Tagespreis">
                 </div>
               </div>
               <div class="mb-3 buttons">

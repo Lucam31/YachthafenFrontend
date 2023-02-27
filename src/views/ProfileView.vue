@@ -91,29 +91,27 @@ export default {
                 vorname: this.Vorname,
                 email: this.Email
             });
-            this.updateStore();
+            this.updateStoreDaten();
 
         },
         async onPasswortSpeichern(){
             if(this.Passwort1 == this.Passwort2){
-                await axios.post(APIURLService.getAPIUrl() + '/api/Kunden/UpdateKunde', {
+                await axios.post(APIURLService.getAPIUrl() + '/api/Kunden/ChangePasswort', {
                 kundeId: this.$store.getters.getKundenId,
-                name: this.Name,
-                vorname: this.Vorname,
-                email: this.Email,
                 Passwort: this.Passwort1
             });
-                this.updateStore();
             }else{
                 console.log("kracht");
                 this.PasswortMaching = false;
             }
         },
-        updateStore(){
+        updateStoreDaten(){
             var kundendaten = {
+                m_KundenId: this.$store.getters.getKundenId,
                 m_Email: this.Email,
                 m_Vorname: this.Vorname,
-                m_Name: this.Name
+                m_Name: this.Name,
+                m_Rolle: this.$store.getters.getRolle
             }
 
             this.$store.commit('setKundenDaten', kundendaten);

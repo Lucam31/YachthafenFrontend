@@ -184,7 +184,6 @@
                 <input type="text" class="form-control" id="tiefgang" disabled :value="Boot.m_Tiefgang">
               </div>
             </div>
-            <button type="submit" class="input-group-text cancelButton">Löschen</button>
 
 
 
